@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b11f4b'/%3E%3Cpath d='M18 34c0-9 6-16 14-16s14 7 14 16v9c0 2-2 3-4 3h-5v-9h-4v9h-2v-9h-4v9h-5c-2 0-4-1-4-3v-9z' fill='white'/%3E%3Ccircle cx='27' cy='32' r='3' fill='%23b11f4b'/%3E%3Ccircle cx='37' cy='32' r='3' fill='%23b11f4b'/%3E%3C/svg%3E" />
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--cp-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre {
+      font-family: Consolas, "Courier New", Courier, monospace;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .hero-main, .hero-side, .card, .nav, .callout {
+      background: var(--cp-surface);
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      box-shadow: var(--cp-shadow);
+    }
+    .hero-main {
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      inset: auto 28px 28px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: var(--cp-accent-soft);
+      pointer-events: none;
+    }
+    .eyebrow {
+      color: var(--cp-accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+    .subtitle {
+      color: var(--cp-text-muted);
+      font-size: 18px;
+      max-width: 760px;
+      margin: 0 0 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--cp-border);
+      background: var(--cp-surface-soft);
+      color: var(--cp-text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .metric {
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-bg-elevated);
+    }
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--cp-accent);
+      margin-bottom: 6px;
+    }
+    .metric span {
+      color: var(--cp-text-muted);
+      font-size: 13px;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 24px 0;
+      background: var(--cp-panel-strong);
+      backdrop-filter: blur(10px);
+    }
+    .nav a {
+      border: 1px solid var(--cp-border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--cp-text);
+      background: var(--cp-surface);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav a:hover {
+      background: var(--cp-accent-soft);
+      border-color: var(--cp-accent);
+      text-decoration: none;
+    }
+    section { margin-top: 32px; }
+    h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      letter-spacing: -.03em;
+    }
+    h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    .section-lead {
+      color: var(--cp-text-muted);
+      margin: 0 0 18px;
+      max-width: 920px;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      padding: 20px;
+      box-shadow: none;
+      background: var(--cp-surface);
+    }
+    .card.soft { background: var(--cp-bg-elevated); }
+    .card.accent {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+    .card p, .card ul, .card ol {
+      margin-top: 8px;
+      margin-bottom: 0;
+      color: var(--cp-text-muted);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+      border: 1px solid var(--cp-accent);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--cp-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--cp-surface-soft);
+      color: var(--cp-text);
+      font-size: 13px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    tr:last-child td { border-bottom: 0; }
+    td { color: var(--cp-text-muted); }
+    td strong { color: var(--cp-text); }
+    .callout {
+      padding: 20px;
+      border-left: 6px solid var(--cp-accent);
+      box-shadow: none;
+      margin: 16px 0;
+      background: var(--cp-bg-elevated);
+    }
+    .callout strong { color: var(--cp-text); }
+    .danger { border-left-color: var(--cp-danger); }
+    .success { border-left-color: var(--cp-success); }
+    .warning { border-left-color: var(--cp-warning); }
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      position: relative;
+      padding: 18px 18px 18px 62px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-weight: 800;
+    }
+    .step p { margin: 6px 0 0; color: var(--cp-text-muted); }
+    pre {
+      margin: 12px 0 0;
+      padding: 14px;
+      border-radius: 0.625rem;
+      border: 1px solid var(--cp-border);
+      background: var(--cp-surface-soft);
+      color: var(--cp-text);
+      white-space: pre-wrap;
+      overflow-x: auto;
+      font-size: 13px;
+    }
+    .checklist {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .checklist li {
+      padding: 12px 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text-muted);
+    }
+    .checklist li::before {
+      content: "鉁�";
+      color: var(--cp-success);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    .router {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .router-panel {
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      padding: 20px;
+    }
+    .choice-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .choice-list button {
+      width: 100%;
+      text-align: left;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      border-color: var(--cp-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .choice-list button:hover,
+    .choice-list button.active {
+      background: var(--cp-accent-soft);
+      border-color: var(--cp-accent);
+    }
+    .choice-list small {
+      color: var(--cp-text-muted);
+      font-weight: 600;
+    }
+    .result-box {
+      min-height: 100%;
+      border: 1px solid var(--cp-accent);
+      background: var(--cp-accent-soft);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .result-box dl {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px 14px;
+      margin: 14px 0 0;
+    }
+    .result-box dt {
+      color: var(--cp-text);
+      font-weight: 800;
+    }
+    .result-box dd {
+      margin: 0;
+      color: var(--cp-text-muted);
+    }
+    .risk-meter {
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      padding: 20px;
+    }
+    .risk-controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .risk-controls label {
+      display: grid;
+      gap: 6px;
+      color: var(--cp-text-muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    select {
+      width: 100%;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 10px;
+      background: var(--cp-surface-soft);
+      color: var(--cp-text);
+      font: inherit;
+    }
+    .risk-score {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 16px;
+    }
+    .score-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 8px solid var(--cp-accent);
+      background: var(--cp-bg-elevated);
+      color: var(--cp-accent);
+      font-size: 30px;
+      font-weight: 900;
+    }
+    .copy-card {
+      position: relative;
+    }
+    .copy-card button {
+      margin-top: 12px;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    button {
+      border: 1px solid var(--cp-accent);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      border-radius: 0.625rem;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      border-color: var(--cp-border-strong);
+    }
+    button:hover { background: var(--cp-accent-hover); }
+    button.secondary:hover { background: var(--cp-accent-soft); }
+    .footer {
+      margin-top: 40px;
+      color: var(--cp-text-soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .hero, .grid-2, .grid-3, .grid-4, .router, .risk-controls, .risk-score { grid-template-columns: 1fr; }
+      .hero-main { padding: 24px; }
+      .nav { position: static; }
+      table { min-width: 680px; }
+    }
+    @media print {
+      .nav, .top-actions { display: none; }
+      .page { max-width: none; padding: 0; }
+      .hero-main, .hero-side, .card, .callout { box-shadow: none; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">鏇村揩浜や粯 路 鏇村皯杩斿伐 路 鏇村彲鎺х殑 AI 浣跨敤</div>
+        <h1>GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡</h1>
+        <p class="subtitle">鐢ㄦ纭殑妯″瀷銆佹ā寮忓拰涓婁笅鏂囷紝璁� Copilot 鏇村儚涓€浣嶉珮鏁堝崗浣滆€咃細灏忛棶棰樺揩閫熻В鍐筹紝澶嶆潅浠诲姟鍏堣鍒掑啀鎵ц锛岄暱閾捐矾宸ヤ綔鏇寸ǔ瀹氥€佹洿鐪佸績銆�</p>
+        <div class="meta-row">
+          <span class="pill">Chat / Ask / Edit / Agent / Plan</span>
+          <span class="pill">IDE 鎻掍欢 / CLI / GitHub Copilot App</span>
+          <span class="pill">妯″瀷璺敱 + 涓婁笅鏂囨不鐞� + 杈撳嚭鎺у埗</span>
+        </div>
+        <div class="top-actions">
+          <button onclick="window.print()">鎵撳嵃鎴栧鍑� PDF</button>
+          <button class="secondary" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')">鍒囨崲鏄庢殫涓婚</button>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div class="metric"><strong>4脳鈥�8脳</strong><span>涓绘祦妯″瀷杈撳嚭 token 閫氬父姣旇緭鍏� token 鏇磋吹锛屾帶鍒惰緭鍑烘槸鏈€楂� ROI 鏉犳潌銆�</span></div>
+        <div class="metric"><strong>5鈥�25脳</strong><span>妯＄硦 Agent 浠诲姟鍙兘姣斾竴娆¤仛鐒� Ask/Plan 璋冪敤璐垫暟鍊嶅埌鏁板崄鍊嶃€�</span></div>
+        <div class="metric"><strong>90%+</strong><span>鐪熷疄璇锋眰鎴愭湰甯告潵鑷郴缁熸彁绀恒€佸巻鍙层€佸伐鍏� Schema銆佹枃浠跺拰缁堢涓婁笅鏂囥€�</span></div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="鐩綍">
+      <a href="#tldr">閫熸煡</a>
+      <a href="#billing">璁¤垂鏈哄埗</a>
+      <a href="#model">妯″瀷閫夋嫨</a>
+      <a href="#mode">妯″紡閫夋嫨</a>
+      <a href="#context">涓婁笅鏂囨不鐞�</a>
+      <a href="#prompts">鎻愮ず璇嶆妧宸�</a>
+      <a href="#tools">鎻掍欢/CLI/Copilot App</a>
+      <a href="#agent">Agent 楂橀樁鎶€宸�</a>
+      <a href="#team">鍥㈤槦寤鸿</a>
+      <a href="#personas">鐢ㄦ埛鐢诲儚</a>
+      <a href="#diagnostics">娑堣€楄瘖鏂�</a>
+      <a href="#router">浠诲姟璺敱鍣�</a>
+      <a href="#checklist">琛屽姩娓呭崟</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <section id="tldr">
+      <h2>鍏堢湅杩� 10 鏉★細鏈€蹇彁鍗囨晥鐜囩殑浣跨敤涔犳儻</h2>
+      <p class="section-lead">鐩爣涓嶆槸灏戠敤 Copilot锛岃€屾槸鎶婂畠鐢ㄥ湪鏈€鍚堥€傜殑鍦版柟锛氬皬闂蹇€熼棶锛屾槑纭敼鍔ㄧ洿鎺ユ敼锛屽鏉備换鍔″厛瑙勫垝锛屽ぇ涓婁笅鏂囧彧鍦ㄧ湡姝ｉ渶瑕佹椂浣跨敤銆�</p>
+      <div class="grid grid-2">
+        <div class="card accent">
+          <h3>榛樿绛栫暐</h3>
+          <ul>
+            <li>鏃ュ父闂瓟銆丄PI 鏌ヨ銆佽娉曚慨姝ｏ細鍏堢敤 Auto 鎴� mini 绫荤粡娴庢ā鍨嬨€�</li>
+            <li>鏅€氱紪鐮併€侀噸鏋勩€佹祴璇曚慨澶嶏細浣跨敤涓诲姏閫氱敤妯″瀷锛屽厛鏄庣‘楠屾敹鏍囧噯銆�</li>
+            <li>鏋舵瀯銆佸畨鍏ㄣ€佽法妯″潡澶嶆潅闂锛氬厛鐢ㄩ珮闃舵ā鍨嬪仛 Plan锛屽啀鍒囧洖杈冧究瀹滄ā鍨嬫墽琛屻€�</li>
+            <li>杈撳嚭榛樿瑕佹眰鐭細<code>3 bullets max</code>銆�<code>code only</code>銆�<code>table format</code>銆�</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>鏈€璐靛弽妯″紡</h3>
+          <ul>
+            <li>涓€鍙モ€滃府鎴戜紭鍖栦竴涓嬮」鐩€濈洿鎺ュ紑 Agent锛岃瀹冩帰绱� 20 姝ャ€�</li>
+            <li>闀夸細璇濅竴鐩翠笉鏂紝鍘嗗彶涓婁笅鏂囨粴鍒版暟涓� token 浠嶇户缁拷闂€�</li>
+            <li>鍏ㄥ眬鍚敤涓€鍫� MCP/鎻掍欢宸ュ叿锛屾瘡涓€姝� Agent 閮介噸鏂板彂閫佸伐鍏� Schema銆�</li>
+            <li>鎶� <code>copilot-instructions.md</code> 鍐欐垚 Wiki锛岄暱鏈熷父椹诲姞杞藉ぇ閲忎綆浠峰€艰鍒欍€�</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout success">
+        <strong>榛勯噾鍏紡锛�</strong>鍏� Ask 鏄庣‘闂 鈫� Plan 鍥哄寲鏂规鍜岄獙鏀舵爣鍑� 鈫� Agent 鍙墽琛屽皬鑼冨洿浠诲姟 鈫� 闀夸細璇濆強鏃舵€荤粨閲嶅紑 鈫� 瀹氭湡浼樺寲涓汉閰嶇疆銆�
+      </div>
+    </section>
+
+    <section id="billing">
+      <h2>鐞嗚В AI Credits锛氳处鍗曚笉鏄彧绠椾綘鎵撶殑瀛�</h2>
+      <p class="section-lead">Usage-Based Billing 鍚庯紝Copilot 鐨� Chat銆丄gent銆丆LI銆丆ode Review 绛夋櫤鑳戒氦浜掍細鎸夋ā鍨� token 浠锋牸鎶樼畻涓� AI Credits銆備紶缁熶唬鐮佽ˉ鍏ㄥ拰 Next Edit Suggestions 浠嶅睘浜庢牳蹇冨紑鍙戜綋楠岋紝閫氬父涓嶆寜杩欑被 Chat/Agent token 娑堣€楄鍏ャ€�</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="badge">杈撳叆</span>
+          <h3>浣犵湅鍒扮殑鎻愮ず璇嶅彧鏄啺灞变竴瑙�</h3>
+          <p>姣忔璇锋眰鍓嶈繕浼氬彔鍔犵郴缁熸彁绀恒€佷粨搴撴寚浠ゃ€佹枃浠朵笂涓嬫枃銆佸璇濆巻鍙层€佸伐鍏锋弿杩板拰缁堢杈撳嚭銆傜湡姝ｇ殑澶уご甯稿父涓嶆槸鐢ㄦ埛杈撳叆銆�</p>
+        </div>
+        <div class="card">
+          <span class="badge">杈撳嚭</span>
+          <h3>杈撳嚭閫氬父鏇磋吹</h3>
+          <p>澶氬妯″瀷鐨勮緭鍑轰环鏍奸€氬父鏄緭鍏ョ殑 4鈥�8 鍊嶃€傝妯″瀷灏戝啓搴熻瘽锛屾瘮鎶婄敤鎴锋彁绀鸿瘝浠� 50 token 鍘嬪埌 30 token 鏇存湁浠峰€笺€�</p>
+        </div>
+        <div class="card">
+          <span class="badge">姹犲寲</span>
+          <h3>Gross 涓� Billed 鐨勫樊寮�</h3>
+          <p>Gross usage 鍙〃绀哄凡娑堣€楃殑鍩虹姹� AI Credits锛汢illed amount 涓� 0 寰€寰€鎰忓懗鐫€杩樺湪鍖呭惈棰濆害鎴栧叡浜睜鍐咃紝灏氭湭瑙﹀彂棰濆棰勭畻銆�</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>娑堣€楁潵婧�</th><th>涓轰粈涔堜細鍙樿吹</th><th>鐢ㄦ埛鍙帶鍔ㄤ綔</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>瀵硅瘽鍘嗗彶</strong></td><td>姣忚疆鎶婂墠闈笂涓嬫枃缁х画甯︿笂锛岄暱浼氳瘽鍙兘绱鍒版暟涓� token銆�</td><td>涓婚鍒囨崲銆侀棶棰樿В鍐炽€佷笂涓嬫枃寰堥暱鏃舵€荤粨鍚庢柊寮€浼氳瘽锛汣LI 涓強鏃� <code>/clear</code>銆�</td></tr>
+            <tr><td><strong>鏂囦欢涓婁笅鏂�</strong></td><td>鑷姩甯﹀叆鐩搁偦鏂囦欢銆佹樉寮忓紩鐢ㄥぇ鏂囦欢銆佹暣浠撴帰绱㈤兘浼氭斁澶ц緭鍏ャ€�</td><td>鍙紩鐢ㄥ繀瑕佹枃浠讹紱鍏堥棶鈥滈渶瑕佸摢浜涙枃浠垛€濆啀鍠備笂涓嬫枃锛涘ぇ鏂囦欢鎴彇鐩稿叧鍑芥暟銆�</td></tr>
+            <tr><td><strong>宸ュ叿 Schema</strong></td><td>MCP/鎻掍欢宸ュ叿鎻忚堪鍦� Agent 姣忎竴姝ラ兘鍙兘琚噸鏂板彂閫併€�</td><td>鎸夊伐浣滃尯鍚敤宸ュ叿锛涗笉鐢ㄧ殑 MCP 鍏抽棴锛涢伩鍏嶅叏灞€鍚敤鎵€鏈夊伐鍏枫€�</td></tr>
+            <tr><td><strong>缁堢杈撳嚭</strong></td><td>瀹夎鏃ュ織銆佹祴璇曟棩蹇椼€乨iff銆乴ockfile銆佺洰褰曞垪琛ㄤ細浜х敓澶ч噺浣庝俊鍙锋枃鏈€�</td><td>浣跨敤鍘嬬缉杈撳嚭锛涜鍛戒护瀹夐潤杩愯锛涘彧鎶婂け璐ョ墖娈点€佸叧閿爢鏍堝拰鎽樿缁� Copilot銆�</td></tr>
+            <tr><td><strong>杈撳嚭鏂囨湰</strong></td><td>鍥炵瓟瓒婇暱锛屾垚鏈秺楂橈紱瑙ｉ噴鍨嬪洖绛斿挨鍏跺鏄撹啫鑳€銆�</td><td>瑕佹眰鈥滃彧缁欎唬鐮佲€濃€滄渶澶� 3 鐐光€濃€滆〃鏍艰緭鍑衡€濃€滃厛缁撹鍚庝竴琛岀悊鐢扁€濄€�</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="model">
+      <h2>妯″瀷閫夋嫨锛氫笉瑕佹妸鎵€鏈変换鍔￠兘浜ょ粰鏈€璐垫ā鍨�</h2>
+      <p class="section-lead">楂橀樁妯″瀷鐨勪环鍊煎湪浜庡鐞嗕笉纭畾鎬с€佽法鍩熸帹鐞嗗拰鍏抽敭鍐崇瓥锛涗竴鏃︽柟妗堟槑纭紝鎵ц闃舵閫氬父鍙互鍒囧埌鏇翠究瀹滅殑妯″瀷銆傛渶浼樺疄璺垫槸鈥滆鍒掔敤寮烘ā鍨嬶紝鎵ц鐢ㄧ粡娴庢ā鍨嬧€濄€�</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>浠诲姟绫诲瀷</th><th>鎺ㄨ崘妯″瀷灞傜骇</th><th>鎺ㄨ崘妯″紡</th><th>涓轰粈涔�</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>璇硶銆丄PI銆佹鍒欍€丼QL/KQL 灏忛棶绛�</strong></td><td>Auto / mini / fast model</td><td>Ask</td><td>闂杈圭晫娓呮櫚锛屼笉闇€瑕佹槀璐垫帹鐞嗗拰澶氭宸ュ叿璋冪敤銆�</td></tr>
+            <tr><td><strong>鍗曟枃浠跺嚱鏁般€佸崟鍏冩祴璇曘€佺畝鍗� bug</strong></td><td>缁忔祹鎴栦富鍔涢€氱敤妯″瀷</td><td>Edit / Chat</td><td>涓婁笅鏂囧皬锛岀洿鎺ヤ慨鏀规垨瑙ｉ噴鍗冲彲銆�</td></tr>
+            <tr><td><strong>澶氭枃浠跺姛鑳姐€侀噸鏋勩€佽縼绉�</strong></td><td>涓诲姏閫氱敤妯″瀷</td><td>Plan 鈫� Agent</td><td>鍏堝浐鍖栬鍒掞紝閬垮厤 Agent 鐩茬洰鎺㈢储銆�</td></tr>
+            <tr><td><strong>鏋舵瀯銆佸畨鍏ㄣ€佹€ц兘銆佸鏉傛柊闂</strong></td><td>楂橀樁鎺ㄧ悊妯″瀷</td><td>Plan / Ask</td><td>楂樹环鍊兼帹鐞嗛樁娈靛€煎緱澶氳姳锛屼絾涓嶈璁╁畠闀挎椂闂村仛鏈烘鎵ц銆�</td></tr>
+            <tr><td><strong>Commit message銆佹爣棰樸€佹憳瑕併€侀噸鍛藉悕寤鸿</strong></td><td>Utility / small model</td><td>绯荤粺鑷姩鎴栫粡娴庢ā鍨�</td><td>杩欑被 lightweight task 搴旂敱灏忔ā鍨嬫垨绯荤粺 utility flow 鍒嗘祦銆�</td></tr>
+            <tr><td><strong>澶ц寖鍥� Code Review</strong></td><td>涓诲姏鎴栭珮闃舵ā鍨嬶紝鎸夐闄╅€夋嫨</td><td>Review + 鑼冨洿绾︽潫</td><td>瀹℃煡鑼冨洿瓒婂ぇ鎴愭湰瓒婇珮锛涘厛闄愬畾鐩綍銆侀闄╃被鍨嬪拰杈撳嚭鏍煎紡銆�</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>涓ら樁娈佃矾鐢辨ā鏉匡細</strong><br />
+        闃舵 1锛氶珮闃舵ā鍨� + Plan锛岃緭鍑烘枃浠舵竻鍗曘€侀闄╃偣銆侀獙鏀舵爣鍑嗐€佹墽琛屾楠ゃ€�<br />
+        闃舵 2锛氫富鍔�/缁忔祹妯″瀷 + Agent/Edit锛屽彧鎸夎鍒掓敼鍔紝骞惰姹傗€滃畬鎴愬悗鍙姤鍛婂彉鏇村拰娴嬭瘯缁撴灉鈥濄€�
+      </div>
+      <pre>Prompt template:
+Use a strong model for planning only.
+Task: migrate auth middleware to Result&lt;T,E&gt; style.
+Output: concise plan, affected files, acceptance criteria, risks.
+Do not edit files yet. 12 bullets max.</pre>
+    </section>
+
+    <section id="mode">
+      <h2>妯″紡閫夋嫨锛欰sk銆丒dit銆丳lan銆丄gent 涓嶆槸鍚屼竴涓环鏍兼。</h2>
+      <p class="section-lead">妯″紡鍐冲畾璋冪敤娆℃暟銆佸伐鍏蜂娇鐢ㄣ€佷笂涓嬫枃鎵╁紶閫熷害銆傚厛閫夋渶渚垮疁涓旇冻澶熷畬鎴愪换鍔＄殑妯″紡锛岃€屼笉鏄粯璁ゆ妸鎵€鏈夐棶棰橀兘浜ょ粰 Agent銆�</p>
+      <div class="grid grid-4">
+        <div class="card">
+          <span class="badge">Completion / NES</span>
+          <h3>杈瑰啓杈硅ˉ</h3>
+          <p>閫傚悎灞€閮ㄤ唬鐮佽ˉ榻愩€佷笅涓€姝ョ紪杈戝缓璁€侀噸澶嶆牱鏉裤€傛棤闇€瑙ｉ噴銆佷笉闇€瑕佸鏂囦欢鎺ㄧ悊鏃朵紭鍏堜娇鐢ㄣ€�</p>
+        </div>
+        <div class="card">
+          <span class="badge">Ask</span>
+          <h3>闂竻妤�</h3>
+          <p>閫傚悎瑙ｉ噴銆佹煡 API銆佹瘮杈冩柟妗堛€佸畾浣嶆€濊矾銆備竴娆¤皟鐢ㄦ垚鏈綆锛屾槸 Agent 鍓嶇殑浣庢垚鏈緞娓呴樁娈点€�</p>
+        </div>
+        <div class="card">
+          <span class="badge">Edit / Inline Chat</span>
+          <h3>灏忚寖鍥存敼</h3>
+          <p>閫傚悎鍗曟枃浠舵垨閫変腑浠ｇ爜鏀瑰啓銆傛瘮 Agent 鏇村彲鎺э紝閬垮厤宸ュ叿閾惧拰浠撳簱鎺㈢储甯︽潵鐨勯澶� token銆�</p>
+        </div>
+        <div class="card">
+          <span class="badge">Agent</span>
+          <h3>绔埌绔墽琛�</h3>
+          <p>閫傚悎澶氭枃浠躲€侀渶瑕佽窇鍛戒护銆侀渶瑕侀獙璇佺殑浠诲姟銆傚繀椤荤粰鑼冨洿銆侀獙鏀舵爣鍑嗐€佹渶澶ц疆娆″拰杈撳嚭涓婇檺銆�</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>濡傛灉浣犺繕璇翠笉娓呪€滃畬鎴愮瓑浜庝粈涔堚€濓紝鍏堜笉瑕佸紑 Agent</h3>
+          <p>鍏堢敤 Ask 璁� Copilot 甯綘鎶婇棶棰樻媶鎴愭枃浠躲€佹楠ゃ€侀闄╁拰楠屾敹鏍囧噯銆�</p>
+        </div>
+        <div class="step">
+          <h3>濡傛灉鍙敼涓€涓嚱鏁帮紝涓嶈璁� Agent 鎵叏浠�</h3>
+          <p>閫変腑浠ｇ爜鐢� Inline Chat/Edit锛涘憡璇夊畠鍙敼杩欎竴娈碉紝淇濈暀鍏叡鎺ュ彛銆�</p>
+        </div>
+        <div class="step">
+          <h3>濡傛灉瑕佽法鏂囦欢鎵ц锛屽厛 Plan 鍚� Agent</h3>
+          <p>璁� Agent 璇诲彇璁″垝鏂囦欢鎴栨寜璁″垝鎵ц锛屽噺灏戞帰绱㈠拰杩斿伐銆�</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="context">
+      <h2>涓婁笅鏂囨不鐞嗭細鎶娾€滄案杩滃姞杞解€濈殑涓滆タ鍙樺皬</h2>
+      <p class="section-lead">Token 浼樺寲鐨勬牳蹇冧笉鏄皯鍐欐彁绀鸿瘝锛岃€屾槸鍑忓皯姣忎竴杞兘浼氶噸澶嶅甫涓婄殑鍥哄畾鎴愭湰銆備粨搴撴寚浠ゃ€丮CP 宸ュ叿銆佸巻鍙层€佺粓绔緭鍑洪兘瑕佹不鐞嗐€�</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>鎸囦护鍒嗗眰</h3>
+          <p>甯搁┗鍙斁椋庢牸銆佸懡鍚嶃€佽緭鍑洪檺鍒剁瓑楂橀瑙勫垯锛涙ā鍧楃害瀹氱敤 <code>applyTo</code> 闄愬畾璺緞锛涗綆棰戞祦绋嬬敤 slash command 鎴栨枃妗ｆ寜闇€寮曠敤銆�</p>
+          <pre>---
+applyTo: "src/api/**/*.ts"
+---
+API conventions:
+- Validate with zod.
+- Return { data, error } envelope.
+- Handlers stay thin.</pre>
+        </div>
+        <div class="card">
+          <h3>鏂颁細璇濆崼鐢�</h3>
+          <p>瓒呰繃 20 杞€佷富棰樺垏鎹€€佸凡瑙ｅ喅闂銆佷笂涓嬫枃鎺ヨ繎鍗犳弧鏃讹紝璁� Copilot 鍏堜骇鍑� handoff summary锛岀劧鍚庢柊寮€浼氳瘽缁х画銆�</p>
+          <pre>Summarize current state for a new session:
+- goal
+- decisions
+- files changed
+- remaining tasks
+- commands already run
+10 bullets max.</pre>
+        </div>
+        <div class="card">
+          <h3>宸ュ叿鏈€灏忓寲</h3>
+          <p>MCP 鎸夊伐浣滃尯鍚敤锛屼笉瑕佸叏灞€鎵撳紑銆備换鍔′笉闇€瑕� Slack/Jira/鏁版嵁搴�/娴忚鍣ㄥ伐鍏锋椂鍏抽棴锛岄伩鍏嶆瘡姝ュ彂閫� Schema 绋庛€�</p>
+          <pre>Agent constraints:
+- Use only file read/edit and test command.
+- Do not call browser or external APIs.
+- Max 12 turns.
+- Stop if acceptance criteria unclear.</pre>
+        </div>
+      </div>
+      <div class="callout warning">
+        <strong>AGENTS.md / copilot-instructions.md 涓嶈鍐欐垚鐧剧銆�</strong>濡傛灉 Agent 鑳介€氳繃璇讳唬鐮佽嚜宸辨帹鏂紝灏变笉瑕佸啓杩涘幓銆傚彧淇濈暀鈥滆俯鍧戜細鍑轰簨鏁呪€濈殑瑙勫垯锛氫緥濡傚繀椤荤敤鏌愬寘绠＄悊鍣ㄣ€侀儴缃查渶瑕� VPN銆佽縼绉诲繀椤绘寜椤哄簭銆佽璇佹ā鍧楃姝㈤『鎵嬮噸鏋勩€�
+      </div>
+    </section>
+
+    <section id="prompts">
+      <h2>鎻愮ず璇嶉珮绾у啓娉曪細楂樺瘑搴︺€佸己绾︽潫銆佸皯搴熻瘽</h2>
+      <p class="section-lead">鈥滅煭鈥濅笉涓€瀹氫究瀹滐紝鈥滀俊鎭瘑搴︹€濇墠渚垮疁銆傛妸鑷劧璇█鏁ｆ枃鏀规垚缁撴瀯鍖栭渶姹傘€佺被鍨嬬鍚嶃€佷吉浠ｇ爜銆佽〃鏍肩害鏉燂紝閫氬父鏇寸渷涔熸洿鍑嗐€�</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>浠庢暎鏂囨敼鎴愪换鍔¤鏍�</h3>
+          <pre>浣庡瘑搴�:
+Could you please help me create an endpoint that accepts user data and validates fields...
+
+楂樺瘑搴�:
+POST /api/users
+Validate:
+- name: string, required
+- email: string, required, email
+400: { errors }
+201: { data: user }
+Persist to DB. Add tests.</pre>
+        </div>
+        <div class="card">
+          <h3>杈撳嚭涓婇檺瑕佸啓杩涙瘡娆′换鍔�</h3>
+          <pre>Answer format:
+- Start with final recommendation.
+- Max 5 bullets.
+- Include code diff only if needed.
+- No background explanation.
+- If blocked, state exact blocker.</pre>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>鐩爣</th><th>鎺ㄨ崘鎸囦护</th><th>閫傜敤鍦烘櫙</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>鍙瀹炵幇</strong></td><td><code>Code only, no explanation.</code></td><td>闇€姹傛槑纭€佸彧缂轰唬鐮併€�</td></tr>
+            <tr><td><strong>蹇€熷垽鏂�</strong></td><td><code>Yes or no, then one line why.</code></td><td>鏂规閫夋嫨銆侀闄╁垽鏂€�</td></tr>
+            <tr><td><strong>闄愬埗鍐楅暱</strong></td><td><code>3 bullets max.</code></td><td>鏃ュ父闂瓟銆佹€荤粨銆�</td></tr>
+            <tr><td><strong>缁撴瀯鍖栧姣�</strong></td><td><code>Table format: option, when to use, tradeoff.</code></td><td>妯″瀷銆佹灦鏋勩€佹柟妗堟瘮杈冦€�</td></tr>
+            <tr><td><strong>鍑忓皯杩斿伐</strong></td><td><code>Ask clarifying questions only if required to avoid wrong implementation.</code></td><td>闇€姹備笉娓呬絾甯屾湜淇濇寔杩涘害銆�</td></tr>
+            <tr><td><strong>閬垮厤澶ц寖鍥存敼鍔�</strong></td><td><code>Touch only these files. Do not refactor unrelated code.</code></td><td>鐢熶骇浠ｇ爜銆侀闄╂帶鍒躲€�</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>璇█閫夋嫨锛�</strong>鎶€鏈彁绀鸿瘝鍙紭鍏堜娇鐢ㄨ嫳鏂囷紝灏ゅ叾鏄� API銆佷唬鐮併€佺被鍨嬨€侀敊璇俊鎭紱涓枃璇存槑涔熷彲浠ワ紝浣嗗叧閿害鏉熷缓璁繚鐣欎唬鐮佸師鐢熻〃杈俱€備腑鏂囧湪閮ㄥ垎妯″瀷涓� token 鏁堢巼鎺ヨ繎鑻辨枃锛屼絾鑻辨枃鐢熸€佷唬鐮佽鏂欐洿绋冲畾銆�
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>鎻掍欢銆丆LI銆丟itHub Copilot App锛氫笉鍚屽叆鍙ｉ€傚悎涓嶅悓宸ヤ綔</h2>
+      <p class="section-lead">鍏ュ彛涓嶅悓锛岄粯璁や笂涓嬫枃銆佸伐鍏锋潈闄愬拰娑堣€楁ā寮忎篃涓嶅悓銆傛妸浠诲姟鏀惧埌鏈€鍚堥€傜殑鍏ュ彛锛屾棦鐪� token 涔熺渷鏃堕棿銆�</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>浣跨敤鏂瑰紡</th><th>鏈€閫傚悎</th><th>Token 椋庨櫓</th><th>楂樼鐢ㄦ硶</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IDE 鎻掍欢锛歏S Code / Visual Studio / JetBrains</strong></td>
+              <td>浠ｇ爜琛ュ叏銆両nline Chat銆佸眬閮� Edit銆丄gent 鏀逛唬鐮併€佹祴璇曚慨澶嶃€�</td>
+              <td>鑷姩鏂囦欢涓婁笅鏂囥€侀暱浼氳瘽銆佺粓绔緭鍑恒€佸伐鍏峰垪琛ㄥ彲鑳芥斁澶с€�</td>
+              <td>鍏堥€変腑鐩稿叧浠ｇ爜鍐嶉棶锛涘紑鍚粓绔緭鍑哄帇缂╋紱鐢� <code>applyTo</code> 鎸囦护锛涗换鍔＄粨鏉熸柊寮€浼氳瘽銆�</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Copilot CLI / gh 鎵╁睍</strong></td>
+              <td>鍛戒护琛岃В閲娿€佺敓鎴� shell 鍛戒护銆佷粨搴撹嚜鍔ㄥ寲銆侀绠�/鐢ㄩ噺鑴氭湰銆�</td>
+              <td>CLI/Agent 鍙兘鍙嶅璺戝懡浠ゅ苟鍚炲叆闀挎棩蹇椼€�</td>
+              <td>鍛戒护鍔� quiet 鍙傛暟锛涘彧璐撮敊璇憳瑕侊紱楂樻秷鑰楁椂閬垮厤閲嶅澶т笂涓嬫枃 CLI 浠诲姟銆�</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Copilot App</strong></td>
+              <td>鐙珛浣跨敤 Copilot Chat銆佹暣鐞嗘€濊矾銆佺敓鎴愭彁绀鸿瘝銆佸仛杞婚噺鎶€鏈棶绛斿拰浠诲姟瑙勫垝銆�</td>
+              <td>濡傛灉鎶婂畠褰撴垚闀夸細璇濆伐浣滃彴锛屽巻鍙蹭笂涓嬫枃浼氭寔缁闀匡紱濡傛灉鍙嶅绮樿创澶ф鏃ュ織鎴栦唬鐮侊紝涔熶細鏀惧ぇ娑堣€椼€�</td>
+              <td>鐢ㄤ簬婢勬竻闇€姹傘€佹媶瑙ｄ换鍔°€佺敓鎴愬彲甯﹀洖 IDE 鐨勮鍒掞紱澶嶆潅瀹炵幇鍥炲埌 IDE 鎻掍欢鎴� CLI 涓墽琛屻€�</td>
+            </tr>
+            <tr>
+              <td><strong>Copilot Coding Agent</strong></td>
+              <td>浠� issue 鑷姩寮€鍒嗘敮銆佹彁浜� PR銆佸鐞嗘槑纭换鍔°€�</td>
+              <td>浠诲姟鎻忚堪妯＄硦鏃朵細鎺㈢储銆佽窇鍛戒护銆侀噸璇曪紝娑堣€椾笉鍙娴嬨€�</td>
+              <td>issue 妯℃澘鍐欐竻楠屾敹鏍囧噯銆佷笉鍙敼鑼冨洿銆佹祴璇曞懡浠ゃ€佹渶澶у疄鐜拌寖鍥淬€�</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout success">
+        <strong>鍏ュ彛閫夋嫨鍙ｈ瘈锛�</strong>鑳借ˉ鍏ㄥ氨鍒� Chat锛岃兘 Inline Edit 灏卞埆 Agent锛岃兘 Ask 娓呮灏卞埆璁� Agent 鐚滐紝鑳藉皬 PR Review 灏卞埆鍏ㄤ粨鎵弿銆�
+      </div>
+    </section>
+
+    <section id="agent">
+      <h2>Agent 楂橀樁鎶€宸э細鎶婃帰绱㈠彉鎴愭墽琛岋紝鎶婂け鎺у彉鎴愬彲鎺�</h2>
+      <p class="section-lead">Agent 涓嶆槸鈥滄洿鑱槑鐨� Chat鈥濓紝鑰屾槸浼氬杞皟鐢ㄦā鍨嬨€佽鍙栨枃浠躲€佹墽琛屽懡浠ゅ拰浣跨敤宸ュ叿鐨勫伐浣滄祦銆傚畠鐨勪环鍊奸珮锛屼絾蹇呴』鏈夎竟鐣屻€�</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>濂� Agent 鎻愮ず璇�</h3>
+          <pre>Goal:
+Implement user-level budget display in admin page.
+
+Scope:
+- Only src/admin/billing/**
+- Do not change auth or routing
+
+Acceptance:
+- Shows gross, billed, remaining
+- Handles missing budget explicitly
+- Existing tests pass
+
+Process:
+1. Inspect relevant files only
+2. Propose short plan
+3. Implement
+4. Run targeted tests
+
+Output:
+Final summary only, max 5 bullets.</pre>
+        </div>
+        <div class="card">
+          <h3>鍧� Agent 鎻愮ず璇�</h3>
+          <pre>甯垜鐪嬬湅杩欎釜椤圭洰鍝噷鍙互浼樺寲锛�
+椤轰究淇竴涓嬫湁闂鐨勫湴鏂癸紝
+鏈€濂芥€ц兘鍜屾灦鏋勯兘鎻愬崌涓€涓嬨€�</pre>
+          <p>闂锛氳寖鍥存棤闄愩€侀獙鏀舵爣鍑嗙己澶便€佸鏄撳叏浠撴帰绱€€佽緭鍑哄啑闀裤€佽繑宸ユ鐜囬珮銆�</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Agent 鎴愭湰鎺у埗鐐�</th><th>寤鸿</th><th>鏁堟灉</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>鏈€澶ц疆娆�</strong></td><td>澶嶆潅浠诲姟璁剧疆 10鈥�20 杞紱涓嶆竻妤氭椂鍏堝仠涓嬫潵闂€�</td><td>闃叉鏃犵┓鎺㈢储鍜岄噸澶嶅懡浠ゃ€�</td></tr>
+            <tr><td><strong>宸ュ叿鏉冮檺</strong></td><td>鍙厑璁告湰浠诲姟闇€瑕佺殑宸ュ叿锛汳CP 鎸� workspace 鍚敤銆�</td><td>鍑忓皯 Schema 绋庡拰璇皟鐢ㄩ闄┿€�</td></tr>
+            <tr><td><strong>缁堢杈撳嚭</strong></td><td>浣跨敤 quiet/no-progress锛涘彧鍥炰紶澶辫触鐗囨鍜屽叧閿憳瑕併€�</td><td>鍑忓皯鏃ュ織鍣０杩涘叆涓婁笅鏂囥€�</td></tr>
+            <tr><td><strong>浠诲姟鍒囩墖</strong></td><td>鎶娾€滃ぇ杩佺Щ鈥濇媶鎴� schema銆丄PI銆乁I銆佹祴璇曞嚑涓� PR銆�</td><td>闄嶄綆鍗曟涓婁笅鏂囧拰杩斿伐鎴愭湰銆�</td></tr>
+            <tr><td><strong>楠岃瘉鍛戒护</strong></td><td>鎻愬墠鍐欐竻 targeted test锛屼笉璁� Agent 鑷繁鐚溿€�</td><td>鍑忓皯璺戦敊鍛戒护銆佽閿欎緷璧栥€侀噸澶嶉獙璇併€�</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="team">
+      <h2>涓汉涓庡洟闃熷缓璁細璁╁ソ涔犳儻鍙樻垚榛樿宸ヤ綔鏂瑰紡</h2>
+      <p class="section-lead">Copilot 鐨勬敹鐩婃潵鑷寔缁娇鐢紝涔熸潵鑷寔缁紭鍖栥€傛妸妯″瀷閫夋嫨銆佷笂涓嬫枃绠＄悊銆丄gent 杈圭晫鍜岃緭鍑烘牸寮忓彉鎴愬洟闃熷叡璇嗭紝鑳藉悓鏃舵彁鍗囦氦浠橀€熷害銆佽川閲忓拰鍙帶鎬с€�</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>鎸夊伐浣滅被鍨嬪垎灞�</h3>
+          <p>鏃ュ父寮€鍙戙€佸鏉傞噸鏋勩€佹灦鏋勮瘎瀹°€佸涔犻棶绛旈€傚悎涓嶅悓妯″瀷鍜屾ā寮忋€備笉瑕佹妸鎵€鏈変换鍔￠兘濂楄繘鍚屼竴绉嶅伐浣滄祦銆�</p>
+        </div>
+        <div class="card">
+          <h3>澶嶇洏楂樻秷鑰椾换鍔�</h3>
+          <p>璁板綍浠诲姟鍏ュ彛銆佹ā鍨嬨€佹ā寮忋€佹枃浠惰寖鍥淬€佸伐鍏疯皟鐢ㄥ拰鏄惁閲嶅鎵ц銆傚鐩樹竴娆￠珮娑堣€椾换鍔★紝閫氬父鑳藉舰鎴愬娆″鐢ㄧ殑浼樺寲涔犳儻銆�</p>
+        </div>
+        <div class="card">
+          <h3>寤虹珛榛樿瑙勫垯</h3>
+          <p>鎶婂父鐢ㄦ彁绀鸿瘝妯℃澘銆佷粨搴撴寚浠ゃ€丄gent 鑼冨洿绾︽潫鍜� Review 鑼冨洿鍐欐垚鍥㈤槦榛樿瑙勫垯锛屽噺灏戞瘡涓汉閲嶅鎽哥储銆�</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>浼樺寲鍔ㄤ綔</th><th>寤鸿鍋氭硶</th><th>瑙傚療淇″彿</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>閰嶇疆鍥為【</strong></td><td>妫€鏌� MCP銆乮nstructions銆佹ā鍨嬮粯璁ゅ€笺€丄gent 浣跨敤棰戠巼銆�</td><td>閲嶅宸ュ叿璋冪敤鍑忓皯锛岄暱浼氳瘽鍑忓皯銆�</td></tr>
+            <tr><td><strong>瀹炶返鍒嗕韩</strong></td><td>娌夋穩 Plan鈫扐gent銆佷笂涓嬫枃鍒囩墖銆佽緭鍑烘帶鍒躲€丳R Review 鑼冨洿鐨勭ず渚嬨€�</td><td>杩斿伐娆℃暟鍑忓皯锛屼换鍔″畬鎴愭洿绋冲畾銆�</td></tr>
+            <tr><td><strong>妯℃澘澶嶇敤</strong></td><td>鎶婇珮棰戝満鏅仛鎴愬彲澶嶅埗鎻愮ず璇嶆ā鏉裤€�</td><td>鍚岀被浠诲姟杈撳嚭鏇翠竴鑷淬€�</td></tr>
+            <tr><td><strong>浠诲姟鎷嗗垎</strong></td><td>鎶婂ぇ鑼冨洿閲嶆瀯銆佸ぇ PR銆佸ぇ鏃ュ織璇婃柇鎷嗘垚灏忔壒娆°€�</td><td>Agent 杞鏇村皯锛孯eview 鏇磋仛鐒︺€�</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="personas">
+      <h2>鎸夌敤鎴风敾鍍忓埗瀹� Copilot 浣跨敤绛栫暐</h2>
+      <p class="section-lead">鍚屼竴涓绠楃瓥鐣ヤ笉閫傚悎鎵€鏈変汉銆傜湡姝ｅ彲鎸佺画鐨� Copilot 鎺ㄥ箍锛岄渶瑕佹妸鐢ㄦ埛鎸変换鍔″鏉傚害銆丄gent 棰戠巼銆佷唬鐮佸奖鍝嶈寖鍥村拰涓氬姟鍏抽敭鎬у垎灞傘€�</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>鐢ㄦ埛鐢诲儚</th><th>鍏稿瀷浠诲姟</th><th>鎺ㄨ崘榛樿鏂瑰紡</th><th>閲嶇偣鍩硅</th><th>娌荤悊寤鸿</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>鏅€氬紑鍙戣€�</strong></td>
+              <td>琛ュ叏銆佸崟鏂囦欢淇敼銆佹祴璇曡ˉ鍏呫€丄PI 鏌ヨ銆�</td>
+              <td>Completion / Inline Edit / Ask锛涢粯璁� Auto 鎴栫粡娴庢ā鍨嬨€�</td>
+              <td>閫変腑浠ｇ爜鍐嶉棶銆侀檺鍒惰緭鍑恒€佷笉瑕佹ā绯婂紑 Agent銆�</td>
+              <td>浼樺厛浣跨敤杞婚噺妯″紡锛涢伩鍏嶉噸澶� Agent 鍜屽ぇ鑼冨洿 Review銆�</td>
+            </tr>
+            <tr>
+              <td><strong>Power User</strong></td>
+              <td>澶氭枃浠跺姛鑳姐€侀噸鏋勩€佽縼绉汇€丆I 淇銆�</td>
+              <td>Plan 鈫� Agent锛涗富鍔涙ā鍨嬫墽琛岋紝楂橀樁妯″瀷鍙鍒掋€�</td>
+              <td>浠诲姟鍒囩墖銆侀獙鏀舵爣鍑嗐€佺粓绔緭鍑哄帇缂┿€丮CP 鏈€灏忓寲銆�</td>
+              <td>寤虹珛鏈€浣冲疄璺垫牱渚嬪簱锛涘畾鏈熷鐩樺鏉備换鍔°€�</td>
+            </tr>
+            <tr>
+              <td><strong>鏋舵瀯/瀹夊叏/骞冲彴宸ョ▼甯�</strong></td>
+              <td>鏋舵瀯璇勫銆佸畨鍏ㄥ▉鑳佸缓妯°€佽法浠撳簱鍐崇瓥銆�</td>
+              <td>楂橀樁妯″瀷 Ask/Plan锛涜緭鍑虹粨鏋勫寲鍐崇瓥锛屼笉闀挎椂闂存墽琛屻€�</td>
+              <td>椋庨櫓娓呭崟銆佽竟鐣屾潯浠躲€佸彧瀹＄湡瀹為棶棰樸€�</td>
+              <td>楂橀樁妯″瀷鐢ㄤ簬鍏抽敭鍒ゆ柇锛涙墽琛岄樁娈典繚鎸佽寖鍥存竻鏅般€�</td>
+            </tr>
+            <tr>
+              <td><strong>鏂版墜寮€鍙戣€�</strong></td>
+              <td>瀛︿範妗嗘灦銆佽В閲婇敊璇€佺悊瑙ｄ唬鐮併€�</td>
+              <td>Ask + 绀轰緥锛涘繀瑕佹椂瑕佹眰瑙ｉ噴锛屼絾闄愬埗闀垮害銆�</td>
+              <td>濡備綍鎻愬嚭涓婁笅鏂囥€佸浣曢獙璇佸洖绛斻€佷笉瑕佺洸鐩矘璐淬€�</td>
+              <td>澶氱敤鐭棶绛斿拰绀轰緥锛涢噸鐐归槻姝㈤暱浼氳瘽婊氶洩鐞冦€�</td>
+            </tr>
+            <tr>
+              <td><strong>鍥㈤槦绠＄悊鍛�</strong></td>
+              <td>鍥㈤槦榛樿閰嶇疆銆佹渶浣冲疄璺点€佺敤閲忚瀵熴€佹ā鏉挎帹骞裤€�</td>
+              <td>Dashboard + 鍥㈤槦瀹炶返澶嶇洏銆�</td>
+              <td>鍏ュ彛宸紓銆佹ā鍨嬭矾鐢便€佷笂涓嬫枃娌荤悊銆佹ā鏉跨淮鎶ゃ€�</td>
+              <td>鍏堝府鍔╁洟闃熷舰鎴愬ソ涔犳儻锛屽啀璋冩暣閰嶇疆绛栫暐銆�</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="diagnostics">
+      <h2>楂樻秷鑰楀満鏅瘖鏂煩闃�</h2>
+      <p class="section-lead">褰� Copilot 鐨勪竴娆′换鍔℃槑鏄炬瘮棰勬湡鏇存參銆佹洿闀挎垨鏇存秷鑰楁椂锛岄€氬父鍙互浠庢ā寮忋€佷笂涓嬫枃銆佸伐鍏峰拰杈撳嚭鍥涗釜缁村害瀹氫綅鍘熷洜銆�</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>鐥囩姸锛欰gent 涓€璺戝氨鐑у緱蹇�</h3>
+          <ul>
+            <li><strong>甯歌鍘熷洜锛�</strong>浠诲姟妯＄硦銆佽疆娆¤繃澶氥€佸叏浠撴帰绱€€丮CP 宸ュ叿杩囧銆佺粓绔棩蹇楄繃闀裤€�</li>
+            <li><strong>蹇€熶慨澶嶏細</strong>鍏� Plan锛涢檺鍒剁洰褰曞拰鏂囦欢锛涜缃渶澶ц疆娆★紱鍏抽棴鏃犲叧宸ュ叿锛涘彧璺� targeted tests銆�</li>
+            <li><strong>瑙傚療淇″彿锛�</strong>妯″瀷銆佹ā寮忋€佹墽琛屾鏁般€佸伐鍏疯皟鐢ㄣ€佹秹鍙婃枃浠舵暟銆佺粓绔緭鍑鸿妯°€�</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>鐥囩姸锛欳hat 瓒婅亰瓒婃參銆佽秺鑱婅秺璐�</h3>
+          <ul>
+            <li><strong>甯歌鍘熷洜锛�</strong>鍘嗗彶杩囬暱銆佷富棰樻贩鏉傘€佸ぇ鏂囦欢鍙嶅寮曠敤銆佹病鏈夋€荤粨閲嶅紑銆�</li>
+            <li><strong>蹇€熶慨澶嶏細</strong>璁� Copilot 鐢熸垚 handoff summary锛涙柊寤轰細璇濓紱鍙创鍏抽敭鐗囨銆�</li>
+            <li><strong>瑙傚療淇″彿锛�</strong>杞鏁般€佷笂涓嬫枃鏂囦欢銆佹槸鍚﹀涓婚銆佹槸鍚﹂噸澶嶈В閲娿€�</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>鐥囩姸锛欳ode Review 娑堣€楅珮</h3>
+          <ul>
+            <li><strong>甯歌鍘熷洜锛�</strong>PR 澶ぇ銆佸叏閲� review銆佸娆￠噸澶� review銆佽姹傝В閲婃墍鏈夐鏍奸棶棰樸€�</li>
+            <li><strong>蹇€熶慨澶嶏細</strong>鎸夌洰褰曞垎鎵癸紱鍙 security/performance/breaking changes/test gaps銆�</li>
+            <li><strong>瑙傚療淇″彿锛�</strong>PR 鏂囦欢鏁般€乨iff 琛屾暟銆乺eview 娆℃暟銆佸鏌ヨ寖鍥淬€�</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>鐥囩姸锛欳LI/缁堢浠诲姟娑堣€楅珮</h3>
+          <ul>
+            <li><strong>甯歌鍘熷洜锛�</strong>瀹夎鏃ュ織銆佹祴璇曟棩蹇椼€丏ocker 杈撳嚭銆乴ockfile diff銆乸rogress bar 杩涘叆涓婁笅鏂囥€�</li>
+            <li><strong>蹇€熶慨澶嶏細</strong>浣跨敤 quiet/no-progress锛涗繚鐣欏け璐ュ爢鏍堬紱涓嶈鎶婂畬鏁存棩蹇楀杺缁欐ā鍨嬨€�</li>
+            <li><strong>瑙傚療淇″彿锛�</strong>鍛戒护銆佽緭鍑鸿鏁般€佹槸鍚﹂噸澶嶈繍琛屻€佹槸鍚﹀彲澶嶇幇銆�</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout success">
+        <strong>浼樺厛鍋氫笁涓姩浣滐細</strong>缂╁皬涓婁笅鏂囥€侀檺鍒惰緭鍑恒€佹媶鍒嗕换鍔°€傚ぇ澶氭暟楂樻秷鑰楀満鏅兘鑳介€氳繃杩欎笁姝ュ厛闄嶄笅鏉ワ紝鍐嶅喅瀹氭槸鍚﹂渶瑕佹洿鎹㈡ā鍨嬫垨妯″紡銆�
+      </div>
+    </section>
+
+    <section id="router">
+      <h2>浠诲姟璺敱鍣細30 绉掗€夊妯″瀷涓庢ā寮�</h2>
+      <p class="section-lead">鍏堥€夋嫨鏈€鎺ヨ繎鐨勪换鍔＄被鍨嬶紝鍐嶆寜鎺ㄨ崘鍏ュ彛銆佹ā鍨嬪拰鎻愮ず璇嶆墽琛屻€傞€夊璧风偣锛岄€氬父鑳藉噺灏戞帰绱€€佽繑宸ュ拰涓嶅繀瑕佺殑涓婁笅鏂囨秷鑰椼€�</p>
+      <div class="router">
+        <div class="router-panel">
+          <h3>閫夋嫨浣犵殑浠诲姟</h3>
+          <div class="choice-list" id="taskChoices">
+            <button data-task="lookup" class="active">鏌� API / 瑙ｉ噴閿欒 / 璇硶闂 <small>浣庢垚鏈�</small></button>
+            <button data-task="single">鍗曟枃浠舵敼鍔� / 鍗曞厓娴嬭瘯 / 灏� bug <small>鍙帶</small></button>
+            <button data-task="feature">澶氭枃浠跺姛鑳� / 閲嶆瀯 / 杩佺Щ <small>闇€璁″垝</small></button>
+            <button data-task="review">PR Review / 瀹夊叏鎬ц兘瀹℃煡 <small>闄愯寖鍥�</small></button>
+            <button data-task="architecture">鏋舵瀯 / 瀹夊叏 / 澶嶆潅鏈煡闂 <small>楂樹环鍊�</small></button>
+            <button data-task="automation">CLI / 鑴氭湰 / 缁堢鑷姩鍖� <small>鎺ф棩蹇�</small></button>
+          </div>
+        </div>
+        <div class="result-box" id="taskResult">
+          <h3>鎺ㄨ崘锛欰sk + Auto/mini</h3>
+          <dl>
+            <dt>鍏ュ彛</dt><dd>IDE Chat 鎴� GitHub Copilot App銆�</dd>
+            <dt>妯″瀷</dt><dd>Auto銆乵ini 鎴� fast model銆�</dd>
+            <dt>鎻愮ず璇�</dt><dd>鐩存帴璐撮敊璇憳瑕佹垨 API 鍚嶇О锛岃姹� 3 bullets max銆�</dd>
+            <dt>閬垮潙</dt><dd>涓嶈绮樿创瀹屾暣鏃ュ織锛涘彧淇濈暀鎶ラ敊鍫嗘爤鍜岀浉鍏充唬鐮併€�</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="risk-meter">
+        <h3>Token 椋庨櫓鑷祴</h3>
+        <p class="section-lead">杩欐槸涓€涓惎鍙戝紡璇勫垎锛屼笉浠ｈ〃鐪熷疄璐﹀崟锛涘畠甯姪鐢ㄦ埛鍦ㄦ墽琛屽墠鍒ゆ柇浠诲姟鏄惁瀹规槗澶辨帶銆�</p>
+        <div class="risk-controls">
+          <label>妯″紡
+            <select id="riskMode">
+              <option value="1">Ask / Inline Edit</option>
+              <option value="2">Plan</option>
+              <option value="4">Agent</option>
+              <option value="5">Agent + CLI/Tools</option>
+            </select>
+          </label>
+          <label>妯″瀷
+            <select id="riskModel">
+              <option value="1">Auto / mini</option>
+              <option value="2">涓诲姏閫氱敤妯″瀷</option>
+              <option value="4">楂橀樁鎺ㄧ悊妯″瀷</option>
+            </select>
+          </label>
+          <label>涓婁笅鏂�
+            <select id="riskContext">
+              <option value="1">閫変腑浠ｇ爜 / 1 涓枃浠�</option>
+              <option value="2">灏戦噺鏂囦欢</option>
+              <option value="4">澶氭枃浠� / 澶� PR</option>
+              <option value="5">闀夸細璇� / 鍏ㄤ粨鎺㈢储</option>
+            </select>
+          </label>
+          <label>宸ュ叿
+            <select id="riskTools">
+              <option value="1">鏃犲伐鍏�</option>
+              <option value="2">灏戦噺鍐呯疆宸ュ叿</option>
+              <option value="4">澶氫釜 MCP / 澶栭儴宸ュ叿</option>
+            </select>
+          </label>
+        </div>
+        <div class="risk-score">
+          <div class="score-circle" id="riskScore">浣�</div>
+          <div>
+            <h3 id="riskTitle">浣庨闄╋細鍙互鐩存帴鎵ц</h3>
+            <p id="riskAdvice">淇濇寔杈撳嚭涓婇檺锛岄伩鍏嶇矘璐村畬鏁存棩蹇楀嵆鍙€�</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <h2>鏄庡ぉ灏辫兘寮€濮嬬殑琛屽姩娓呭崟</h2>
+      <p class="section-lead">鎸夋敹鐩婁紭鍏堢骇鎺掑簭銆傛渶鍏堝仛 1銆�3銆�6锛岄€氬父鏈€蹇湅鍒版晥鏋溿€�</p>
+      <ul class="checklist">
+        <li><strong>鍘嬬缉浠撳簱鎸囦护锛�</strong>鎶� <code>copilot-instructions.md</code> 浠� Wiki 鏀规垚鈥滃湴闆锋竻鍗� + 杈撳嚭瑙勫垯鈥濄€�</li>
+        <li><strong>榛樿杈撳嚭涓婇檺锛�</strong>鍦ㄤ釜浜烘垨浠撳簱鎸囦护閲屽姞鍏ョ煭杈撳嚭瑙勫垯锛屽 <code>3 bullets max</code>銆�<code>code only</code>銆�</li>
+        <li><strong>鐩樼偣 MCP 鍜屾彃浠讹細</strong>鍏抽棴涓嶇敤鐨勬湇鍔″櫒鍜屽伐鍏凤紝鎸夊伐浣滃尯鑰屼笉鏄叏灞€鍚敤銆�</li>
+        <li><strong>鍏� Ask 鍚� Agent锛�</strong>楠屾敹鏍囧噯璇翠笉娓呮椂锛屽厛璁� Copilot 浜у嚭璁″垝鍜屾枃浠舵竻鍗曘€�</li>
+        <li><strong>榛樿缁忔祹妯″瀷锛�</strong>鏃ュ父浠诲姟鐢� Auto/mini/涓诲姏妯″瀷锛岄珮闃舵ā鍨嬪彧鍋氬鏉傝鍒掑拰鍏抽敭瀹℃煡銆�</li>
+        <li><strong>浣跨敤 applyTo 鎸囦护锛�</strong>鎶� API銆丏B銆乁I銆佹祴璇曡鍒欐媶鎴愯矾寰勯檺瀹氭枃浠讹紝閬垮厤姣忚疆鍏ㄩ噺鍔犺浇銆�</li>
+        <li><strong>寤虹珛鏂颁細璇濅範鎯細</strong>闀夸細璇濇€荤粨鍚庨噸寮€锛汣LI/Agent 涓婚鍒囨崲鏃舵竻涓婁笅鏂囥€�</li>
+        <li><strong>缁堢瀹夐潤杈撳嚭锛�</strong>璁╂祴璇曘€佹瀯寤恒€佸畨瑁呭懡浠や娇鐢� quiet/no-progress锛屽彧鎶婂け璐ユ憳瑕佺粰妯″瀷銆�</li>
+        <li><strong>Code Review 鍒嗚寖鍥达細</strong>澶� PR 鎸夌洰褰曘€侀闄╃被鍨嬨€佸彉鏇寸被鍨嬪垎鎵瑰銆�</li>
+        <li><strong>姣忔湀澶嶇洏锛�</strong>缁撳悎 AI Credit 鐢ㄩ噺銆佺敤鎴疯鑹层€佷换鍔″叆鍙ｅ拰妯″瀷閫夋嫨璋冧紭棰勭畻绛栫暐銆�</li>
+      </ul>
+    </section>
+
+    <section id="faq">
+      <h2>甯歌闂 FAQ</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>鏄笉鏄秺鐭殑鎻愮ず璇嶈秺鐪侊紵</h3>
+          <p>涓嶄竴瀹氥€傜湡姝ｉ噸瑕佺殑鏄俊鎭瘑搴︺€傚垹鎺夊濂楄瘽鏈夊府鍔╋紝浣嗗鏋滃洜涓哄お鐭鑷存ā鍨嬭瑙ｃ€佸弽澶嶈拷闂垨杩斿伐锛屽弽鑰屾洿璐点€�</p>
+        </div>
+        <div class="card">
+          <h3>浠€涔堟椂鍊欏€煎緱鐢ㄩ珮闃舵ā鍨嬶紵</h3>
+          <p>褰撲换鍔℃秹鍙婃灦鏋勩€佸畨鍏ㄣ€佽法妯″潡澶嶆潅鍐崇瓥銆佹湭鐭ラ棶棰樻帓鏌ユ椂鍊煎緱鐢ㄣ€傚缓璁彧鐢ㄤ簬瑙勫垝鍜屽叧閿垽鏂紝鎵ц闃舵鍒囧洖涓诲姏鎴栫粡娴庢ā鍨嬨€�</p>
+        </div>
+        <div class="card">
+          <h3>Budget 鑳戒笉鑳借В鍐虫秷鑰楄繃蹇紵</h3>
+          <p>Budget 鏄闄╂姢鏍忥紝涓嶆槸浼樺寲鎵嬫銆傚畠鑳介槻姝㈣秴鏀紝浣嗕笉浼氳鍚屾牱浠诲姟鏇寸渷锛涙ā鍨嬭矾鐢便€佷笂涓嬫枃娌荤悊鍜� Agent 绾︽潫鎵嶄細闄嶄綆鍗曚换鍔℃秷鑰椼€�</p>
+        </div>
+        <div class="card">
+          <h3>涓轰粈涔堝悓鏍蜂竴鍙ヨ瘽锛孉gent 姣� Chat 璐碉紵</h3>
+          <p>Agent 鍙兘澶氳疆璋冪敤妯″瀷銆佽鍙栨枃浠躲€佹墽琛屽懡浠ゃ€佽皟鐢ㄥ伐鍏凤紝骞跺湪姣忎竴姝ュ甫涓婂伐鍏� Schema 鍜屽巻鍙蹭笂涓嬫枃锛汣hat 閫氬父鏄洿灏戣疆娆＄殑鐩存帴闂瓟銆�</p>
+        </div>
+        <div class="card">
+          <h3>Code Review 搴旇鎬庝箞鐪侊紵</h3>
+          <p>涓嶈璁╂ā鍨嬪鎵€鏈夐鏍奸棶棰樸€傞檺瀹氶闄╃被鍨嬨€侀檺瀹氱洰褰曘€佸垎鎵瑰澶� PR锛屽苟瑕佹眰鍙緭鍑虹湡瀹� blocker 鎴栭珮椋庨櫓闂銆�</p>
+        </div>
+        <div class="card">
+          <h3>濡備綍鍒ゆ柇涓€绉嶇敤娉曟槸鍚﹀€煎緱淇濈暀锛�</h3>
+          <p>鐪嬪畠鏄惁鑳界ǔ瀹氬噺灏戣繑宸ャ€佺缉鐭氦浠樻椂闂淬€侀檷浣庝笂涓嬫枃鑶ㄨ儉锛屽苟涓斿湪鍚岀被浠诲姟閲屽彲閲嶅浣跨敤銆�</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="templates">
+      <h2>鍙洿鎺ュ鍒剁殑鎻愮ず璇嶆ā鏉�</h2>
+      <div class="grid grid-2">
+        <div class="card copy-card">
+          <h3>浣庢垚鏈緞娓�</h3>
+          <pre id="tplClarify">Analyze this task before implementation.
+Return:
+1. affected files
+2. unknowns
+3. safest implementation path
+4. acceptance criteria
+No code. 8 bullets max.</pre>
+          <button onclick="copyTemplate('tplClarify', this)">澶嶅埗妯℃澘</button>
+        </div>
+        <div class="card copy-card">
+          <h3>鍙楁帶瀹炵幇</h3>
+          <pre id="tplImplement">Implement the approved plan.
+Constraints:
+- touch only listed files
+- no unrelated refactor
+- preserve public API
+- run targeted tests only
+Final response: changed files + test result, max 5 bullets.</pre>
+          <button onclick="copyTemplate('tplImplement', this)">澶嶅埗妯℃澘</button>
+        </div>
+        <div class="card copy-card">
+          <h3>楂樹俊鍙� Review</h3>
+          <pre id="tplReview">Review this PR for real issues only:
+- security
+- data loss
+- concurrency
+- breaking API changes
+- test gaps
+No style comments. Table output. Max 10 findings.</pre>
+          <button onclick="copyTemplate('tplReview', this)">澶嶅埗妯℃澘</button>
+        </div>
+        <div class="card copy-card">
+          <h3>闀夸細璇濅氦鎺�</h3>
+          <pre id="tplHandoff">Create handoff for a new Copilot session:
+- goal
+- decisions made
+- files changed
+- commands run
+- remaining work
+- risks
+No narrative. 12 bullets max.</pre>
+          <button onclick="copyTemplate('tplHandoff', this)">澶嶅埗妯℃澘</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡
+    </div>
+  </main>
+  <script>
+    const taskRoutes = {
+      lookup: {
+        title: "鎺ㄨ崘锛欰sk + Auto/mini",
+        rows: {
+          "鍏ュ彛": "IDE Chat 鎴� GitHub Copilot App銆�",
+          "妯″瀷": "Auto銆乵ini 鎴� fast model銆�",
+          "鎻愮ず璇�": "璐撮敊璇憳瑕併€丄PI 鍚嶇О鎴栨渶灏忎唬鐮佺墖娈碉紝瑕佹眰 3 bullets max銆�",
+          "閬垮潙": "涓嶈绮樿创瀹屾暣鏃ュ織锛涗笉瑕佺敤 Agent 鎵粨搴撱€�"
+        }
+      },
+      single: {
+        title: "鎺ㄨ崘锛欼nline Edit / Chat Edit + 涓诲姏鎴栫粡娴庢ā鍨�",
+        rows: {
+          "鍏ュ彛": "IDE 閲岄€変腑鍑芥暟鎴栨枃浠跺悗浣跨敤 Inline Chat/Edit銆�",
+          "妯″瀷": "Auto銆乵ini 鎴栦富鍔涢€氱敤妯″瀷銆�",
+          "鎻愮ず璇�": "鏄庣‘鍙敼閫変腑鑼冨洿锛屼繚鐣欐帴鍙ｏ紝杈撳嚭 code only銆�",
+          "閬垮潙": "涓嶈璁� Agent 涓轰竴涓嚱鏁拌鍙栧叏浠撱€�"
+        }
+      },
+      feature: {
+        title: "鎺ㄨ崘锛歅lan 鈫� Agent锛岃鍒掑拰鎵ц鍒嗙",
+        rows: {
+          "鍏ュ彛": "鍏� Chat/Plan 杈撳嚭璁″垝锛屽啀 Agent 鎵ц銆�",
+          "妯″瀷": "楂橀樁鎴栦富鍔涙ā鍨嬪仛璁″垝锛涗富鍔�/缁忔祹妯″瀷鎵ц銆�",
+          "鎻愮ず璇�": "鍐欐竻 scope銆乤cceptance銆乼est command銆乵ax turns銆�",
+          "閬垮潙": "涓嶈鐢ㄤ竴鍙ユā绯婇渶姹傜洿鎺ュ紑 Agent銆�"
+        }
+      },
+      review: {
+        title: "鎺ㄨ崘锛氳寖鍥撮檺瀹� Review",
+        rows: {
+          "鍏ュ彛": "GitHub PR銆両DE diff 鎴� Copilot Code Review銆�",
+          "妯″瀷": "鎸夐闄╅€夋嫨涓诲姏鎴栭珮闃舵ā鍨嬨€�",
+          "鎻愮ず璇�": "鍙 security銆乨ata loss銆乧oncurrency銆乥reaking changes銆乼est gaps銆�",
+          "閬垮潙": "澶� PR 鍒嗙洰褰曞垎鎵瑰锛涗笉瑕佽姹傛墍鏈夐鏍煎缓璁€�"
+        }
+      },
+      architecture: {
+        title: "鎺ㄨ崘锛氶珮闃舵ā鍨� Ask/Plan锛屼笉鐩存帴闀挎椂闂存墽琛�",
+        rows: {
+          "鍏ュ彛": "Chat / Plan锛岀敤浜庡喅绛栥€侀闄┿€佹柟妗堟瘮杈冦€�",
+          "妯″瀷": "楂橀樁鎺ㄧ悊妯″瀷銆�",
+          "鎻愮ず璇�": "瑕佹眰琛ㄦ牸杈撳嚭 tradeoff銆乺isks銆乨ecision銆乶ext steps銆�",
+          "閬垮潙": "鏂规纭畾鍚庡垏鍥炰富鍔涙ā鍨嬫垨浜哄伐鎵ц銆�"
+        }
+      },
+      automation: {
+        title: "鎺ㄨ崘锛欳LI + quiet output + 鏄庣‘鍛戒护杈圭晫",
+        rows: {
+          "鍏ュ彛": "Copilot CLI銆乬h CLI銆両DE terminal agent銆�",
+          "妯″瀷": "缁忔祹鎴栦富鍔涙ā鍨嬶紝闄ら潪闇€瑕佸鏉傝瘖鏂€�",
+          "鎻愮ず璇�": "瑕佹眰鐢熸垚鍛戒护鍓嶈В閲婇闄╋紱杩愯鍚庡彧鍒嗘瀽澶辫触鐗囨銆�",
+          "閬垮潙": "閬垮厤 progress銆乮nstall log銆佸畬鏁� test log 杩涘叆涓婁笅鏂囥€�"
+        }
+      }
+    };
+
+    function renderRoute(key) {
+      const route = taskRoutes[key];
+      const result = document.getElementById("taskResult");
+      const rows = Object.entries(route.rows).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+      result.innerHTML = `<h3>${route.title}</h3><dl>${rows}</dl>`;
+      document.querySelectorAll("#taskChoices button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.task === key);
+      });
+    }
+
+    document.querySelectorAll("#taskChoices button").forEach((button) => {
+      button.addEventListener("click", () => renderRoute(button.dataset.task));
+    });
+
+    function updateRisk() {
+      const mode = Number(document.getElementById("riskMode").value);
+      const model = Number(document.getElementById("riskModel").value);
+      const context = Number(document.getElementById("riskContext").value);
+      const tools = Number(document.getElementById("riskTools").value);
+      const score = mode + model + context + tools;
+      const label = document.getElementById("riskScore");
+      const title = document.getElementById("riskTitle");
+      const advice = document.getElementById("riskAdvice");
+      if (score <= 6) {
+        label.textContent = "浣�";
+        title.textContent = "浣庨闄╋細鍙互鐩存帴鎵ц";
+        advice.textContent = "淇濇寔杈撳嚭涓婇檺锛岄伩鍏嶇矘璐村畬鏁存棩蹇楀嵆鍙€�";
+      } else if (score <= 10) {
+        label.textContent = "涓�";
+        title.textContent = "涓闄╋細鍏堟敹绐勮寖鍥�";
+        advice.textContent = "寤鸿鍏� Ask/Plan锛岄檺鍒舵枃浠躲€佸伐鍏峰拰杈撳嚭鏍煎紡锛屽啀鎵ц銆�";
+      } else {
+        label.textContent = "楂�";
+        title.textContent = "楂橀闄╋細鍏堟媶浠诲姟鍐嶈繍琛�";
+        advice.textContent = "鎶婁换鍔℃媶鎴愬涓皬姝ラ锛屽叧闂棤鍏� MCP锛岃缃渶澶ц疆娆★紝骞跺厛浜у嚭楠屾敹鏍囧噯銆�";
+      }
+    }
+
+    document.querySelectorAll("#riskMode, #riskModel, #riskContext, #riskTools").forEach((input) => {
+      input.addEventListener("change", updateRisk);
+    });
+
+    async function copyTemplate(id, button) {
+      const text = document.getElementById(id).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const old = button.textContent;
+        button.textContent = "宸插鍒�";
+        setTimeout(() => { button.textContent = old; }, 1200);
+      } catch {
+        button.textContent = "璇锋墜鍔ㄥ鍒�";
+      }
+    }
+  </script>
+</body>
+</html>
