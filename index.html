@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡</title>
+  <title>GitHub Copilot 高效使用与 Token 优化指南</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b11f4b'/%3E%3Cpath d='M18 34c0-9 6-16 14-16s14 7 14 16v9c0 2-2 3-4 3h-5v-9h-4v9h-2v-9h-4v9h-5c-2 0-4-1-4-3v-9z' fill='white'/%3E%3Ccircle cx='27' cy='32' r='3' fill='%23b11f4b'/%3E%3Ccircle cx='37' cy='32' r='3' fill='%23b11f4b'/%3E%3C/svg%3E" />
   <script>
     (() => {
@@ -344,7 +344,7 @@
       color: var(--cp-text-muted);
     }
     .checklist li::before {
-      content: "鉁�";
+      content: "✓";
       color: var(--cp-success);
       font-weight: 800;
       margin-right: 8px;
@@ -509,129 +509,129 @@
   <main class="page">
     <header class="hero">
       <div class="hero-main">
-        <div class="eyebrow">鏇村揩浜や粯 路 鏇村皯杩斿伐 路 鏇村彲鎺х殑 AI 浣跨敤</div>
-        <h1>GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡</h1>
-        <p class="subtitle">鐢ㄦ纭殑妯″瀷銆佹ā寮忓拰涓婁笅鏂囷紝璁� Copilot 鏇村儚涓€浣嶉珮鏁堝崗浣滆€咃細灏忛棶棰樺揩閫熻В鍐筹紝澶嶆潅浠诲姟鍏堣鍒掑啀鎵ц锛岄暱閾捐矾宸ヤ綔鏇寸ǔ瀹氥€佹洿鐪佸績銆�</p>
+        <div class="eyebrow">更快交付 · 更少返工 · 更可控的 AI 使用</div>
+        <h1>GitHub Copilot 高效使用与 Token 优化指南</h1>
+        <p class="subtitle">用正确的模型、模式和上下文，让 Copilot 更像一位高效协作者：小问题快速解决，复杂任务先规划再执行，长链路工作更稳定、更省心。</p>
         <div class="meta-row">
           <span class="pill">Chat / Ask / Edit / Agent / Plan</span>
-          <span class="pill">IDE 鎻掍欢 / CLI / GitHub Copilot App</span>
-          <span class="pill">妯″瀷璺敱 + 涓婁笅鏂囨不鐞� + 杈撳嚭鎺у埗</span>
+          <span class="pill">IDE 插件 / CLI / GitHub Copilot App</span>
+          <span class="pill">模型路由 + 上下文治理 + 输出控制</span>
         </div>
         <div class="top-actions">
-          <button onclick="window.print()">鎵撳嵃鎴栧鍑� PDF</button>
-          <button class="secondary" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')">鍒囨崲鏄庢殫涓婚</button>
+          <button onclick="window.print()">打印或导出 PDF</button>
+          <button class="secondary" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')">切换明暗主题</button>
         </div>
       </div>
       <aside class="hero-side">
-        <div class="metric"><strong>4脳鈥�8脳</strong><span>涓绘祦妯″瀷杈撳嚭 token 閫氬父姣旇緭鍏� token 鏇磋吹锛屾帶鍒惰緭鍑烘槸鏈€楂� ROI 鏉犳潌銆�</span></div>
-        <div class="metric"><strong>5鈥�25脳</strong><span>妯＄硦 Agent 浠诲姟鍙兘姣斾竴娆¤仛鐒� Ask/Plan 璋冪敤璐垫暟鍊嶅埌鏁板崄鍊嶃€�</span></div>
-        <div class="metric"><strong>90%+</strong><span>鐪熷疄璇锋眰鎴愭湰甯告潵鑷郴缁熸彁绀恒€佸巻鍙层€佸伐鍏� Schema銆佹枃浠跺拰缁堢涓婁笅鏂囥€�</span></div>
+        <div class="metric"><strong>4×–8×</strong><span>主流模型输出 token 通常比输入 token 更贵，控制输出是最高 ROI 杠杆。</span></div>
+        <div class="metric"><strong>5–25×</strong><span>模糊 Agent 任务可能比一次聚焦 Ask/Plan 调用贵数倍到数十倍。</span></div>
+        <div class="metric"><strong>90%+</strong><span>真实请求成本常来自系统提示、历史、工具 Schema、文件和终端上下文。</span></div>
       </aside>
     </header>
 
-    <nav class="nav" aria-label="鐩綍">
-      <a href="#tldr">閫熸煡</a>
-      <a href="#billing">璁¤垂鏈哄埗</a>
-      <a href="#model">妯″瀷閫夋嫨</a>
-      <a href="#mode">妯″紡閫夋嫨</a>
-      <a href="#context">涓婁笅鏂囨不鐞�</a>
-      <a href="#prompts">鎻愮ず璇嶆妧宸�</a>
-      <a href="#tools">鎻掍欢/CLI/Copilot App</a>
-      <a href="#agent">Agent 楂橀樁鎶€宸�</a>
-      <a href="#team">鍥㈤槦寤鸿</a>
-      <a href="#personas">鐢ㄦ埛鐢诲儚</a>
-      <a href="#diagnostics">娑堣€楄瘖鏂�</a>
-      <a href="#router">浠诲姟璺敱鍣�</a>
-      <a href="#checklist">琛屽姩娓呭崟</a>
+    <nav class="nav" aria-label="目录">
+      <a href="#tldr">速查</a>
+      <a href="#billing">计费机制</a>
+      <a href="#model">模型选择</a>
+      <a href="#mode">模式选择</a>
+      <a href="#context">上下文治理</a>
+      <a href="#prompts">提示词技巧</a>
+      <a href="#tools">插件/CLI/Copilot App</a>
+      <a href="#agent">Agent 高阶技巧</a>
+      <a href="#team">团队建议</a>
+      <a href="#personas">用户画像</a>
+      <a href="#diagnostics">消耗诊断</a>
+      <a href="#router">任务路由器</a>
+      <a href="#checklist">行动清单</a>
       <a href="#faq">FAQ</a>
     </nav>
 
     <section id="tldr">
-      <h2>鍏堢湅杩� 10 鏉★細鏈€蹇彁鍗囨晥鐜囩殑浣跨敤涔犳儻</h2>
-      <p class="section-lead">鐩爣涓嶆槸灏戠敤 Copilot锛岃€屾槸鎶婂畠鐢ㄥ湪鏈€鍚堥€傜殑鍦版柟锛氬皬闂蹇€熼棶锛屾槑纭敼鍔ㄧ洿鎺ユ敼锛屽鏉備换鍔″厛瑙勫垝锛屽ぇ涓婁笅鏂囧彧鍦ㄧ湡姝ｉ渶瑕佹椂浣跨敤銆�</p>
+      <h2>先看这 10 条：最快提升效率的使用习惯</h2>
+      <p class="section-lead">目标不是少用 Copilot，而是把它用在最合适的地方：小问题快速问，明确改动直接改，复杂任务先规划，大上下文只在真正需要时使用。</p>
       <div class="grid grid-2">
         <div class="card accent">
-          <h3>榛樿绛栫暐</h3>
+          <h3>默认策略</h3>
           <ul>
-            <li>鏃ュ父闂瓟銆丄PI 鏌ヨ銆佽娉曚慨姝ｏ細鍏堢敤 Auto 鎴� mini 绫荤粡娴庢ā鍨嬨€�</li>
-            <li>鏅€氱紪鐮併€侀噸鏋勩€佹祴璇曚慨澶嶏細浣跨敤涓诲姏閫氱敤妯″瀷锛屽厛鏄庣‘楠屾敹鏍囧噯銆�</li>
-            <li>鏋舵瀯銆佸畨鍏ㄣ€佽法妯″潡澶嶆潅闂锛氬厛鐢ㄩ珮闃舵ā鍨嬪仛 Plan锛屽啀鍒囧洖杈冧究瀹滄ā鍨嬫墽琛屻€�</li>
-            <li>杈撳嚭榛樿瑕佹眰鐭細<code>3 bullets max</code>銆�<code>code only</code>銆�<code>table format</code>銆�</li>
+            <li>日常问答、API 查询、语法修正：先用 Auto 或 mini 类经济模型。</li>
+            <li>普通编码、重构、测试修复：使用主力通用模型，先明确验收标准。</li>
+            <li>架构、安全、跨模块复杂问题：先用高阶模型做 Plan，再切回较便宜模型执行。</li>
+            <li>输出默认要求短：<code>3 bullets max</code>、<code>code only</code>、<code>table format</code>。</li>
           </ul>
         </div>
         <div class="card">
-          <h3>鏈€璐靛弽妯″紡</h3>
+          <h3>最贵反模式</h3>
           <ul>
-            <li>涓€鍙モ€滃府鎴戜紭鍖栦竴涓嬮」鐩€濈洿鎺ュ紑 Agent锛岃瀹冩帰绱� 20 姝ャ€�</li>
-            <li>闀夸細璇濅竴鐩翠笉鏂紝鍘嗗彶涓婁笅鏂囨粴鍒版暟涓� token 浠嶇户缁拷闂€�</li>
-            <li>鍏ㄥ眬鍚敤涓€鍫� MCP/鎻掍欢宸ュ叿锛屾瘡涓€姝� Agent 閮介噸鏂板彂閫佸伐鍏� Schema銆�</li>
-            <li>鎶� <code>copilot-instructions.md</code> 鍐欐垚 Wiki锛岄暱鏈熷父椹诲姞杞藉ぇ閲忎綆浠峰€艰鍒欍€�</li>
+            <li>一句“帮我优化一下项目”直接开 Agent，让它探索 20 步。</li>
+            <li>长会话一直不断，历史上下文滚到数万 token 仍继续追问。</li>
+            <li>全局启用一堆 MCP/插件工具，每一步 Agent 都重新发送工具 Schema。</li>
+            <li>把 <code>copilot-instructions.md</code> 写成 Wiki，长期常驻加载大量低价值规则。</li>
           </ul>
         </div>
       </div>
       <div class="callout success">
-        <strong>榛勯噾鍏紡锛�</strong>鍏� Ask 鏄庣‘闂 鈫� Plan 鍥哄寲鏂规鍜岄獙鏀舵爣鍑� 鈫� Agent 鍙墽琛屽皬鑼冨洿浠诲姟 鈫� 闀夸細璇濆強鏃舵€荤粨閲嶅紑 鈫� 瀹氭湡浼樺寲涓汉閰嶇疆銆�
+        <strong>黄金公式：</strong>先 Ask 明确问题 → Plan 固化方案和验收标准 → Agent 只执行小范围任务 → 长会话及时总结重开 → 定期优化个人配置。
       </div>
     </section>
 
     <section id="billing">
-      <h2>鐞嗚В AI Credits锛氳处鍗曚笉鏄彧绠椾綘鎵撶殑瀛�</h2>
-      <p class="section-lead">Usage-Based Billing 鍚庯紝Copilot 鐨� Chat銆丄gent銆丆LI銆丆ode Review 绛夋櫤鑳戒氦浜掍細鎸夋ā鍨� token 浠锋牸鎶樼畻涓� AI Credits銆備紶缁熶唬鐮佽ˉ鍏ㄥ拰 Next Edit Suggestions 浠嶅睘浜庢牳蹇冨紑鍙戜綋楠岋紝閫氬父涓嶆寜杩欑被 Chat/Agent token 娑堣€楄鍏ャ€�</p>
+      <h2>理解 AI Credits：账单不是只算你打的字</h2>
+      <p class="section-lead">Usage-Based Billing 后，Copilot 的 Chat、Agent、CLI、Code Review 等智能交互会按模型 token 价格折算为 AI Credits。传统代码补全和 Next Edit Suggestions 仍属于核心开发体验，通常不按这类 Chat/Agent token 消耗计入。</p>
       <div class="grid grid-3">
         <div class="card">
-          <span class="badge">杈撳叆</span>
-          <h3>浣犵湅鍒扮殑鎻愮ず璇嶅彧鏄啺灞变竴瑙�</h3>
-          <p>姣忔璇锋眰鍓嶈繕浼氬彔鍔犵郴缁熸彁绀恒€佷粨搴撴寚浠ゃ€佹枃浠朵笂涓嬫枃銆佸璇濆巻鍙层€佸伐鍏锋弿杩板拰缁堢杈撳嚭銆傜湡姝ｇ殑澶уご甯稿父涓嶆槸鐢ㄦ埛杈撳叆銆�</p>
+          <span class="badge">输入</span>
+          <h3>你看到的提示词只是冰山一角</h3>
+          <p>每次请求前还会叠加系统提示、仓库指令、文件上下文、对话历史、工具描述和终端输出。真正的大头常常不是用户输入。</p>
         </div>
         <div class="card">
-          <span class="badge">杈撳嚭</span>
-          <h3>杈撳嚭閫氬父鏇磋吹</h3>
-          <p>澶氬妯″瀷鐨勮緭鍑轰环鏍奸€氬父鏄緭鍏ョ殑 4鈥�8 鍊嶃€傝妯″瀷灏戝啓搴熻瘽锛屾瘮鎶婄敤鎴锋彁绀鸿瘝浠� 50 token 鍘嬪埌 30 token 鏇存湁浠峰€笺€�</p>
+          <span class="badge">输出</span>
+          <h3>输出通常更贵</h3>
+          <p>多家模型的输出价格通常是输入的 4–8 倍。让模型少写废话，比把用户提示词从 50 token 压到 30 token 更有价值。</p>
         </div>
         <div class="card">
-          <span class="badge">姹犲寲</span>
-          <h3>Gross 涓� Billed 鐨勫樊寮�</h3>
-          <p>Gross usage 鍙〃绀哄凡娑堣€楃殑鍩虹姹� AI Credits锛汢illed amount 涓� 0 寰€寰€鎰忓懗鐫€杩樺湪鍖呭惈棰濆害鎴栧叡浜睜鍐咃紝灏氭湭瑙﹀彂棰濆棰勭畻銆�</p>
+          <span class="badge">池化</span>
+          <h3>Gross 与 Billed 的差异</h3>
+          <p>Gross usage 可表示已消耗的基础池 AI Credits；Billed amount 为 0 往往意味着还在包含额度或共享池内，尚未触发额外预算。</p>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>娑堣€楁潵婧�</th><th>涓轰粈涔堜細鍙樿吹</th><th>鐢ㄦ埛鍙帶鍔ㄤ綔</th></tr>
+            <tr><th>消耗来源</th><th>为什么会变贵</th><th>用户可控动作</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>瀵硅瘽鍘嗗彶</strong></td><td>姣忚疆鎶婂墠闈笂涓嬫枃缁х画甯︿笂锛岄暱浼氳瘽鍙兘绱鍒版暟涓� token銆�</td><td>涓婚鍒囨崲銆侀棶棰樿В鍐炽€佷笂涓嬫枃寰堥暱鏃舵€荤粨鍚庢柊寮€浼氳瘽锛汣LI 涓強鏃� <code>/clear</code>銆�</td></tr>
-            <tr><td><strong>鏂囦欢涓婁笅鏂�</strong></td><td>鑷姩甯﹀叆鐩搁偦鏂囦欢銆佹樉寮忓紩鐢ㄥぇ鏂囦欢銆佹暣浠撴帰绱㈤兘浼氭斁澶ц緭鍏ャ€�</td><td>鍙紩鐢ㄥ繀瑕佹枃浠讹紱鍏堥棶鈥滈渶瑕佸摢浜涙枃浠垛€濆啀鍠備笂涓嬫枃锛涘ぇ鏂囦欢鎴彇鐩稿叧鍑芥暟銆�</td></tr>
-            <tr><td><strong>宸ュ叿 Schema</strong></td><td>MCP/鎻掍欢宸ュ叿鎻忚堪鍦� Agent 姣忎竴姝ラ兘鍙兘琚噸鏂板彂閫併€�</td><td>鎸夊伐浣滃尯鍚敤宸ュ叿锛涗笉鐢ㄧ殑 MCP 鍏抽棴锛涢伩鍏嶅叏灞€鍚敤鎵€鏈夊伐鍏枫€�</td></tr>
-            <tr><td><strong>缁堢杈撳嚭</strong></td><td>瀹夎鏃ュ織銆佹祴璇曟棩蹇椼€乨iff銆乴ockfile銆佺洰褰曞垪琛ㄤ細浜х敓澶ч噺浣庝俊鍙锋枃鏈€�</td><td>浣跨敤鍘嬬缉杈撳嚭锛涜鍛戒护瀹夐潤杩愯锛涘彧鎶婂け璐ョ墖娈点€佸叧閿爢鏍堝拰鎽樿缁� Copilot銆�</td></tr>
-            <tr><td><strong>杈撳嚭鏂囨湰</strong></td><td>鍥炵瓟瓒婇暱锛屾垚鏈秺楂橈紱瑙ｉ噴鍨嬪洖绛斿挨鍏跺鏄撹啫鑳€銆�</td><td>瑕佹眰鈥滃彧缁欎唬鐮佲€濃€滄渶澶� 3 鐐光€濃€滆〃鏍艰緭鍑衡€濃€滃厛缁撹鍚庝竴琛岀悊鐢扁€濄€�</td></tr>
+            <tr><td><strong>对话历史</strong></td><td>每轮把前面上下文继续带上，长会话可能累计到数万 token。</td><td>主题切换、问题解决、上下文很长时总结后新开会话；CLI 中及时 <code>/clear</code>。</td></tr>
+            <tr><td><strong>文件上下文</strong></td><td>自动带入相邻文件、显式引用大文件、整仓探索都会放大输入。</td><td>只引用必要文件；先问“需要哪些文件”再喂上下文；大文件截取相关函数。</td></tr>
+            <tr><td><strong>工具 Schema</strong></td><td>MCP/插件工具描述在 Agent 每一步都可能被重新发送。</td><td>按工作区启用工具；不用的 MCP 关闭；避免全局启用所有工具。</td></tr>
+            <tr><td><strong>终端输出</strong></td><td>安装日志、测试日志、diff、lockfile、目录列表会产生大量低信号文本。</td><td>使用压缩输出；让命令安静运行；只把失败片段、关键堆栈和摘要给 Copilot。</td></tr>
+            <tr><td><strong>输出文本</strong></td><td>回答越长，成本越高；解释型回答尤其容易膨胀。</td><td>要求“只给代码”“最多 3 点”“表格输出”“先结论后一行理由”。</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section id="model">
-      <h2>妯″瀷閫夋嫨锛氫笉瑕佹妸鎵€鏈変换鍔￠兘浜ょ粰鏈€璐垫ā鍨�</h2>
-      <p class="section-lead">楂橀樁妯″瀷鐨勪环鍊煎湪浜庡鐞嗕笉纭畾鎬с€佽法鍩熸帹鐞嗗拰鍏抽敭鍐崇瓥锛涗竴鏃︽柟妗堟槑纭紝鎵ц闃舵閫氬父鍙互鍒囧埌鏇翠究瀹滅殑妯″瀷銆傛渶浼樺疄璺垫槸鈥滆鍒掔敤寮烘ā鍨嬶紝鎵ц鐢ㄧ粡娴庢ā鍨嬧€濄€�</p>
+      <h2>模型选择：不要把所有任务都交给最贵模型</h2>
+      <p class="section-lead">高阶模型的价值在于处理不确定性、跨域推理和关键决策；一旦方案明确，执行阶段通常可以切到更便宜的模型。最优实践是“规划用强模型，执行用经济模型”。</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>浠诲姟绫诲瀷</th><th>鎺ㄨ崘妯″瀷灞傜骇</th><th>鎺ㄨ崘妯″紡</th><th>涓轰粈涔�</th></tr>
+            <tr><th>任务类型</th><th>推荐模型层级</th><th>推荐模式</th><th>为什么</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>璇硶銆丄PI銆佹鍒欍€丼QL/KQL 灏忛棶绛�</strong></td><td>Auto / mini / fast model</td><td>Ask</td><td>闂杈圭晫娓呮櫚锛屼笉闇€瑕佹槀璐垫帹鐞嗗拰澶氭宸ュ叿璋冪敤銆�</td></tr>
-            <tr><td><strong>鍗曟枃浠跺嚱鏁般€佸崟鍏冩祴璇曘€佺畝鍗� bug</strong></td><td>缁忔祹鎴栦富鍔涢€氱敤妯″瀷</td><td>Edit / Chat</td><td>涓婁笅鏂囧皬锛岀洿鎺ヤ慨鏀规垨瑙ｉ噴鍗冲彲銆�</td></tr>
-            <tr><td><strong>澶氭枃浠跺姛鑳姐€侀噸鏋勩€佽縼绉�</strong></td><td>涓诲姏閫氱敤妯″瀷</td><td>Plan 鈫� Agent</td><td>鍏堝浐鍖栬鍒掞紝閬垮厤 Agent 鐩茬洰鎺㈢储銆�</td></tr>
-            <tr><td><strong>鏋舵瀯銆佸畨鍏ㄣ€佹€ц兘銆佸鏉傛柊闂</strong></td><td>楂橀樁鎺ㄧ悊妯″瀷</td><td>Plan / Ask</td><td>楂樹环鍊兼帹鐞嗛樁娈靛€煎緱澶氳姳锛屼絾涓嶈璁╁畠闀挎椂闂村仛鏈烘鎵ц銆�</td></tr>
-            <tr><td><strong>Commit message銆佹爣棰樸€佹憳瑕併€侀噸鍛藉悕寤鸿</strong></td><td>Utility / small model</td><td>绯荤粺鑷姩鎴栫粡娴庢ā鍨�</td><td>杩欑被 lightweight task 搴旂敱灏忔ā鍨嬫垨绯荤粺 utility flow 鍒嗘祦銆�</td></tr>
-            <tr><td><strong>澶ц寖鍥� Code Review</strong></td><td>涓诲姏鎴栭珮闃舵ā鍨嬶紝鎸夐闄╅€夋嫨</td><td>Review + 鑼冨洿绾︽潫</td><td>瀹℃煡鑼冨洿瓒婂ぇ鎴愭湰瓒婇珮锛涘厛闄愬畾鐩綍銆侀闄╃被鍨嬪拰杈撳嚭鏍煎紡銆�</td></tr>
+            <tr><td><strong>语法、API、正则、SQL/KQL 小问答</strong></td><td>Auto / mini / fast model</td><td>Ask</td><td>问题边界清晰，不需要昂贵推理和多步工具调用。</td></tr>
+            <tr><td><strong>单文件函数、单元测试、简单 bug</strong></td><td>经济或主力通用模型</td><td>Edit / Chat</td><td>上下文小，直接修改或解释即可。</td></tr>
+            <tr><td><strong>多文件功能、重构、迁移</strong></td><td>主力通用模型</td><td>Plan → Agent</td><td>先固化计划，避免 Agent 盲目探索。</td></tr>
+            <tr><td><strong>架构、安全、性能、复杂新问题</strong></td><td>高阶推理模型</td><td>Plan / Ask</td><td>高价值推理阶段值得多花，但不要让它长时间做机械执行。</td></tr>
+            <tr><td><strong>Commit message、标题、摘要、重命名建议</strong></td><td>Utility / small model</td><td>系统自动或经济模型</td><td>这类 lightweight task 应由小模型或系统 utility flow 分流。</td></tr>
+            <tr><td><strong>大范围 Code Review</strong></td><td>主力或高阶模型，按风险选择</td><td>Review + 范围约束</td><td>审查范围越大成本越高；先限定目录、风险类型和输出格式。</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout">
-        <strong>涓ら樁娈佃矾鐢辨ā鏉匡細</strong><br />
-        闃舵 1锛氶珮闃舵ā鍨� + Plan锛岃緭鍑烘枃浠舵竻鍗曘€侀闄╃偣銆侀獙鏀舵爣鍑嗐€佹墽琛屾楠ゃ€�<br />
-        闃舵 2锛氫富鍔�/缁忔祹妯″瀷 + Agent/Edit锛屽彧鎸夎鍒掓敼鍔紝骞惰姹傗€滃畬鎴愬悗鍙姤鍛婂彉鏇村拰娴嬭瘯缁撴灉鈥濄€�
+        <strong>两阶段路由模板：</strong><br />
+        阶段 1：高阶模型 + Plan，输出文件清单、风险点、验收标准、执行步骤。<br />
+        阶段 2：主力/经济模型 + Agent/Edit，只按计划改动，并要求“完成后只报告变更和测试结果”。
       </div>
       <pre>Prompt template:
 Use a strong model for planning only.
@@ -641,53 +641,53 @@ Do not edit files yet. 12 bullets max.</pre>
     </section>
 
     <section id="mode">
-      <h2>妯″紡閫夋嫨锛欰sk銆丒dit銆丳lan銆丄gent 涓嶆槸鍚屼竴涓环鏍兼。</h2>
-      <p class="section-lead">妯″紡鍐冲畾璋冪敤娆℃暟銆佸伐鍏蜂娇鐢ㄣ€佷笂涓嬫枃鎵╁紶閫熷害銆傚厛閫夋渶渚垮疁涓旇冻澶熷畬鎴愪换鍔＄殑妯″紡锛岃€屼笉鏄粯璁ゆ妸鎵€鏈夐棶棰橀兘浜ょ粰 Agent銆�</p>
+      <h2>模式选择：Ask、Edit、Plan、Agent 不是同一个价格档</h2>
+      <p class="section-lead">模式决定调用次数、工具使用、上下文扩张速度。先选最便宜且足够完成任务的模式，而不是默认把所有问题都交给 Agent。</p>
       <div class="grid grid-4">
         <div class="card">
           <span class="badge">Completion / NES</span>
-          <h3>杈瑰啓杈硅ˉ</h3>
-          <p>閫傚悎灞€閮ㄤ唬鐮佽ˉ榻愩€佷笅涓€姝ョ紪杈戝缓璁€侀噸澶嶆牱鏉裤€傛棤闇€瑙ｉ噴銆佷笉闇€瑕佸鏂囦欢鎺ㄧ悊鏃朵紭鍏堜娇鐢ㄣ€�</p>
+          <h3>边写边补</h3>
+          <p>适合局部代码补齐、下一步编辑建议、重复样板。无需解释、不需要多文件推理时优先使用。</p>
         </div>
         <div class="card">
           <span class="badge">Ask</span>
-          <h3>闂竻妤�</h3>
-          <p>閫傚悎瑙ｉ噴銆佹煡 API銆佹瘮杈冩柟妗堛€佸畾浣嶆€濊矾銆備竴娆¤皟鐢ㄦ垚鏈綆锛屾槸 Agent 鍓嶇殑浣庢垚鏈緞娓呴樁娈点€�</p>
+          <h3>问清楚</h3>
+          <p>适合解释、查 API、比较方案、定位思路。一次调用成本低，是 Agent 前的低成本澄清阶段。</p>
         </div>
         <div class="card">
           <span class="badge">Edit / Inline Chat</span>
-          <h3>灏忚寖鍥存敼</h3>
-          <p>閫傚悎鍗曟枃浠舵垨閫変腑浠ｇ爜鏀瑰啓銆傛瘮 Agent 鏇村彲鎺э紝閬垮厤宸ュ叿閾惧拰浠撳簱鎺㈢储甯︽潵鐨勯澶� token銆�</p>
+          <h3>小范围改</h3>
+          <p>适合单文件或选中代码改写。比 Agent 更可控，避免工具链和仓库探索带来的额外 token。</p>
         </div>
         <div class="card">
           <span class="badge">Agent</span>
-          <h3>绔埌绔墽琛�</h3>
-          <p>閫傚悎澶氭枃浠躲€侀渶瑕佽窇鍛戒护銆侀渶瑕侀獙璇佺殑浠诲姟銆傚繀椤荤粰鑼冨洿銆侀獙鏀舵爣鍑嗐€佹渶澶ц疆娆″拰杈撳嚭涓婇檺銆�</p>
+          <h3>端到端执行</h3>
+          <p>适合多文件、需要跑命令、需要验证的任务。必须给范围、验收标准、最大轮次和输出上限。</p>
         </div>
       </div>
       <div class="steps">
         <div class="step">
-          <h3>濡傛灉浣犺繕璇翠笉娓呪€滃畬鎴愮瓑浜庝粈涔堚€濓紝鍏堜笉瑕佸紑 Agent</h3>
-          <p>鍏堢敤 Ask 璁� Copilot 甯綘鎶婇棶棰樻媶鎴愭枃浠躲€佹楠ゃ€侀闄╁拰楠屾敹鏍囧噯銆�</p>
+          <h3>如果你还说不清“完成等于什么”，先不要开 Agent</h3>
+          <p>先用 Ask 让 Copilot 帮你把问题拆成文件、步骤、风险和验收标准。</p>
         </div>
         <div class="step">
-          <h3>濡傛灉鍙敼涓€涓嚱鏁帮紝涓嶈璁� Agent 鎵叏浠�</h3>
-          <p>閫変腑浠ｇ爜鐢� Inline Chat/Edit锛涘憡璇夊畠鍙敼杩欎竴娈碉紝淇濈暀鍏叡鎺ュ彛銆�</p>
+          <h3>如果只改一个函数，不要让 Agent 扫全仓</h3>
+          <p>选中代码用 Inline Chat/Edit；告诉它只改这一段，保留公共接口。</p>
         </div>
         <div class="step">
-          <h3>濡傛灉瑕佽法鏂囦欢鎵ц锛屽厛 Plan 鍚� Agent</h3>
-          <p>璁� Agent 璇诲彇璁″垝鏂囦欢鎴栨寜璁″垝鎵ц锛屽噺灏戞帰绱㈠拰杩斿伐銆�</p>
+          <h3>如果要跨文件执行，先 Plan 后 Agent</h3>
+          <p>让 Agent 读取计划文件或按计划执行，减少探索和返工。</p>
         </div>
       </div>
     </section>
 
     <section id="context">
-      <h2>涓婁笅鏂囨不鐞嗭細鎶娾€滄案杩滃姞杞解€濈殑涓滆タ鍙樺皬</h2>
-      <p class="section-lead">Token 浼樺寲鐨勬牳蹇冧笉鏄皯鍐欐彁绀鸿瘝锛岃€屾槸鍑忓皯姣忎竴杞兘浼氶噸澶嶅甫涓婄殑鍥哄畾鎴愭湰銆備粨搴撴寚浠ゃ€丮CP 宸ュ叿銆佸巻鍙层€佺粓绔緭鍑洪兘瑕佹不鐞嗐€�</p>
+      <h2>上下文治理：把“永远加载”的东西变小</h2>
+      <p class="section-lead">Token 优化的核心不是少写提示词，而是减少每一轮都会重复带上的固定成本。仓库指令、MCP 工具、历史、终端输出都要治理。</p>
       <div class="grid grid-3">
         <div class="card">
-          <h3>鎸囦护鍒嗗眰</h3>
-          <p>甯搁┗鍙斁椋庢牸銆佸懡鍚嶃€佽緭鍑洪檺鍒剁瓑楂橀瑙勫垯锛涙ā鍧楃害瀹氱敤 <code>applyTo</code> 闄愬畾璺緞锛涗綆棰戞祦绋嬬敤 slash command 鎴栨枃妗ｆ寜闇€寮曠敤銆�</p>
+          <h3>指令分层</h3>
+          <p>常驻只放风格、命名、输出限制等高频规则；模块约定用 <code>applyTo</code> 限定路径；低频流程用 slash command 或文档按需引用。</p>
           <pre>---
 applyTo: "src/api/**/*.ts"
 ---
@@ -697,8 +697,8 @@ API conventions:
 - Handlers stay thin.</pre>
         </div>
         <div class="card">
-          <h3>鏂颁細璇濆崼鐢�</h3>
-          <p>瓒呰繃 20 杞€佷富棰樺垏鎹€€佸凡瑙ｅ喅闂銆佷笂涓嬫枃鎺ヨ繎鍗犳弧鏃讹紝璁� Copilot 鍏堜骇鍑� handoff summary锛岀劧鍚庢柊寮€浼氳瘽缁х画銆�</p>
+          <h3>新会话卫生</h3>
+          <p>超过 20 轮、主题切换、已解决问题、上下文接近占满时，让 Copilot 先产出 handoff summary，然后新开会话继续。</p>
           <pre>Summarize current state for a new session:
 - goal
 - decisions
@@ -708,8 +708,8 @@ API conventions:
 10 bullets max.</pre>
         </div>
         <div class="card">
-          <h3>宸ュ叿鏈€灏忓寲</h3>
-          <p>MCP 鎸夊伐浣滃尯鍚敤锛屼笉瑕佸叏灞€鎵撳紑銆備换鍔′笉闇€瑕� Slack/Jira/鏁版嵁搴�/娴忚鍣ㄥ伐鍏锋椂鍏抽棴锛岄伩鍏嶆瘡姝ュ彂閫� Schema 绋庛€�</p>
+          <h3>工具最小化</h3>
+          <p>MCP 按工作区启用，不要全局打开。任务不需要 Slack/Jira/数据库/浏览器工具时关闭，避免每步发送 Schema 税。</p>
           <pre>Agent constraints:
 - Use only file read/edit and test command.
 - Do not call browser or external APIs.
@@ -718,20 +718,20 @@ API conventions:
         </div>
       </div>
       <div class="callout warning">
-        <strong>AGENTS.md / copilot-instructions.md 涓嶈鍐欐垚鐧剧銆�</strong>濡傛灉 Agent 鑳介€氳繃璇讳唬鐮佽嚜宸辨帹鏂紝灏变笉瑕佸啓杩涘幓銆傚彧淇濈暀鈥滆俯鍧戜細鍑轰簨鏁呪€濈殑瑙勫垯锛氫緥濡傚繀椤荤敤鏌愬寘绠＄悊鍣ㄣ€侀儴缃查渶瑕� VPN銆佽縼绉诲繀椤绘寜椤哄簭銆佽璇佹ā鍧楃姝㈤『鎵嬮噸鏋勩€�
+        <strong>AGENTS.md / copilot-instructions.md 不要写成百科。</strong>如果 Agent 能通过读代码自己推断，就不要写进去。只保留“踩坑会出事故”的规则：例如必须用某包管理器、部署需要 VPN、迁移必须按顺序、认证模块禁止顺手重构。
       </div>
     </section>
 
     <section id="prompts">
-      <h2>鎻愮ず璇嶉珮绾у啓娉曪細楂樺瘑搴︺€佸己绾︽潫銆佸皯搴熻瘽</h2>
-      <p class="section-lead">鈥滅煭鈥濅笉涓€瀹氫究瀹滐紝鈥滀俊鎭瘑搴︹€濇墠渚垮疁銆傛妸鑷劧璇█鏁ｆ枃鏀规垚缁撴瀯鍖栭渶姹傘€佺被鍨嬬鍚嶃€佷吉浠ｇ爜銆佽〃鏍肩害鏉燂紝閫氬父鏇寸渷涔熸洿鍑嗐€�</p>
+      <h2>提示词高级写法：高密度、强约束、少废话</h2>
+      <p class="section-lead">“短”不一定便宜，“信息密度”才便宜。把自然语言散文改成结构化需求、类型签名、伪代码、表格约束，通常更省也更准。</p>
       <div class="grid grid-2">
         <div class="card">
-          <h3>浠庢暎鏂囨敼鎴愪换鍔¤鏍�</h3>
-          <pre>浣庡瘑搴�:
+          <h3>从散文改成任务规格</h3>
+          <pre>低密度:
 Could you please help me create an endpoint that accepts user data and validates fields...
 
-楂樺瘑搴�:
+高密度:
 POST /api/users
 Validate:
 - name: string, required
@@ -741,7 +741,7 @@ Validate:
 Persist to DB. Add tests.</pre>
         </div>
         <div class="card">
-          <h3>杈撳嚭涓婇檺瑕佸啓杩涙瘡娆′换鍔�</h3>
+          <h3>输出上限要写进每次任务</h3>
           <pre>Answer format:
 - Start with final recommendation.
 - Max 5 bullets.
@@ -753,70 +753,70 @@ Persist to DB. Add tests.</pre>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>鐩爣</th><th>鎺ㄨ崘鎸囦护</th><th>閫傜敤鍦烘櫙</th></tr>
+            <tr><th>目标</th><th>推荐指令</th><th>适用场景</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>鍙瀹炵幇</strong></td><td><code>Code only, no explanation.</code></td><td>闇€姹傛槑纭€佸彧缂轰唬鐮併€�</td></tr>
-            <tr><td><strong>蹇€熷垽鏂�</strong></td><td><code>Yes or no, then one line why.</code></td><td>鏂规閫夋嫨銆侀闄╁垽鏂€�</td></tr>
-            <tr><td><strong>闄愬埗鍐楅暱</strong></td><td><code>3 bullets max.</code></td><td>鏃ュ父闂瓟銆佹€荤粨銆�</td></tr>
-            <tr><td><strong>缁撴瀯鍖栧姣�</strong></td><td><code>Table format: option, when to use, tradeoff.</code></td><td>妯″瀷銆佹灦鏋勩€佹柟妗堟瘮杈冦€�</td></tr>
-            <tr><td><strong>鍑忓皯杩斿伐</strong></td><td><code>Ask clarifying questions only if required to avoid wrong implementation.</code></td><td>闇€姹備笉娓呬絾甯屾湜淇濇寔杩涘害銆�</td></tr>
-            <tr><td><strong>閬垮厤澶ц寖鍥存敼鍔�</strong></td><td><code>Touch only these files. Do not refactor unrelated code.</code></td><td>鐢熶骇浠ｇ爜銆侀闄╂帶鍒躲€�</td></tr>
+            <tr><td><strong>只要实现</strong></td><td><code>Code only, no explanation.</code></td><td>需求明确、只缺代码。</td></tr>
+            <tr><td><strong>快速判断</strong></td><td><code>Yes or no, then one line why.</code></td><td>方案选择、风险判断。</td></tr>
+            <tr><td><strong>限制冗长</strong></td><td><code>3 bullets max.</code></td><td>日常问答、总结。</td></tr>
+            <tr><td><strong>结构化对比</strong></td><td><code>Table format: option, when to use, tradeoff.</code></td><td>模型、架构、方案比较。</td></tr>
+            <tr><td><strong>减少返工</strong></td><td><code>Ask clarifying questions only if required to avoid wrong implementation.</code></td><td>需求不清但希望保持进度。</td></tr>
+            <tr><td><strong>避免大范围改动</strong></td><td><code>Touch only these files. Do not refactor unrelated code.</code></td><td>生产代码、风险控制。</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout">
-        <strong>璇█閫夋嫨锛�</strong>鎶€鏈彁绀鸿瘝鍙紭鍏堜娇鐢ㄨ嫳鏂囷紝灏ゅ叾鏄� API銆佷唬鐮併€佺被鍨嬨€侀敊璇俊鎭紱涓枃璇存槑涔熷彲浠ワ紝浣嗗叧閿害鏉熷缓璁繚鐣欎唬鐮佸師鐢熻〃杈俱€備腑鏂囧湪閮ㄥ垎妯″瀷涓� token 鏁堢巼鎺ヨ繎鑻辨枃锛屼絾鑻辨枃鐢熸€佷唬鐮佽鏂欐洿绋冲畾銆�
+        <strong>语言选择：</strong>技术提示词可优先使用英文，尤其是 API、代码、类型、错误信息；中文说明也可以，但关键约束建议保留代码原生表达。中文在部分模型上 token 效率接近英文，但英文生态代码语料更稳定。
       </div>
     </section>
 
     <section id="tools">
-      <h2>鎻掍欢銆丆LI銆丟itHub Copilot App锛氫笉鍚屽叆鍙ｉ€傚悎涓嶅悓宸ヤ綔</h2>
-      <p class="section-lead">鍏ュ彛涓嶅悓锛岄粯璁や笂涓嬫枃銆佸伐鍏锋潈闄愬拰娑堣€楁ā寮忎篃涓嶅悓銆傛妸浠诲姟鏀惧埌鏈€鍚堥€傜殑鍏ュ彛锛屾棦鐪� token 涔熺渷鏃堕棿銆�</p>
+      <h2>插件、CLI、GitHub Copilot App：不同入口适合不同工作</h2>
+      <p class="section-lead">入口不同，默认上下文、工具权限和消耗模式也不同。把任务放到最合适的入口，既省 token 也省时间。</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>浣跨敤鏂瑰紡</th><th>鏈€閫傚悎</th><th>Token 椋庨櫓</th><th>楂樼鐢ㄦ硶</th></tr>
+            <tr><th>使用方式</th><th>最适合</th><th>Token 风险</th><th>高端用法</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>IDE 鎻掍欢锛歏S Code / Visual Studio / JetBrains</strong></td>
-              <td>浠ｇ爜琛ュ叏銆両nline Chat銆佸眬閮� Edit銆丄gent 鏀逛唬鐮併€佹祴璇曚慨澶嶃€�</td>
-              <td>鑷姩鏂囦欢涓婁笅鏂囥€侀暱浼氳瘽銆佺粓绔緭鍑恒€佸伐鍏峰垪琛ㄥ彲鑳芥斁澶с€�</td>
-              <td>鍏堥€変腑鐩稿叧浠ｇ爜鍐嶉棶锛涘紑鍚粓绔緭鍑哄帇缂╋紱鐢� <code>applyTo</code> 鎸囦护锛涗换鍔＄粨鏉熸柊寮€浼氳瘽銆�</td>
+              <td><strong>IDE 插件：VS Code / Visual Studio / JetBrains</strong></td>
+              <td>代码补全、Inline Chat、局部 Edit、Agent 改代码、测试修复。</td>
+              <td>自动文件上下文、长会话、终端输出、工具列表可能放大。</td>
+              <td>先选中相关代码再问；开启终端输出压缩；用 <code>applyTo</code> 指令；任务结束新开会话。</td>
             </tr>
             <tr>
-              <td><strong>GitHub Copilot CLI / gh 鎵╁睍</strong></td>
-              <td>鍛戒护琛岃В閲娿€佺敓鎴� shell 鍛戒护銆佷粨搴撹嚜鍔ㄥ寲銆侀绠�/鐢ㄩ噺鑴氭湰銆�</td>
-              <td>CLI/Agent 鍙兘鍙嶅璺戝懡浠ゅ苟鍚炲叆闀挎棩蹇椼€�</td>
-              <td>鍛戒护鍔� quiet 鍙傛暟锛涘彧璐撮敊璇憳瑕侊紱楂樻秷鑰楁椂閬垮厤閲嶅澶т笂涓嬫枃 CLI 浠诲姟銆�</td>
+              <td><strong>GitHub Copilot CLI / gh 扩展</strong></td>
+              <td>命令行解释、生成 shell 命令、仓库自动化、预算/用量脚本。</td>
+              <td>CLI/Agent 可能反复跑命令并吞入长日志。</td>
+              <td>命令加 quiet 参数；只贴错误摘要；高消耗时避免重复大上下文 CLI 任务。</td>
             </tr>
             <tr>
               <td><strong>GitHub Copilot App</strong></td>
-              <td>鐙珛浣跨敤 Copilot Chat銆佹暣鐞嗘€濊矾銆佺敓鎴愭彁绀鸿瘝銆佸仛杞婚噺鎶€鏈棶绛斿拰浠诲姟瑙勫垝銆�</td>
-              <td>濡傛灉鎶婂畠褰撴垚闀夸細璇濆伐浣滃彴锛屽巻鍙蹭笂涓嬫枃浼氭寔缁闀匡紱濡傛灉鍙嶅绮樿创澶ф鏃ュ織鎴栦唬鐮侊紝涔熶細鏀惧ぇ娑堣€椼€�</td>
-              <td>鐢ㄤ簬婢勬竻闇€姹傘€佹媶瑙ｄ换鍔°€佺敓鎴愬彲甯﹀洖 IDE 鐨勮鍒掞紱澶嶆潅瀹炵幇鍥炲埌 IDE 鎻掍欢鎴� CLI 涓墽琛屻€�</td>
+              <td>独立使用 Copilot Chat、整理思路、生成提示词、做轻量技术问答和任务规划。</td>
+              <td>如果把它当成长会话工作台，历史上下文会持续增长；如果反复粘贴大段日志或代码，也会放大消耗。</td>
+              <td>用于澄清需求、拆解任务、生成可带回 IDE 的计划；复杂实现回到 IDE 插件或 CLI 中执行。</td>
             </tr>
             <tr>
               <td><strong>Copilot Coding Agent</strong></td>
-              <td>浠� issue 鑷姩寮€鍒嗘敮銆佹彁浜� PR銆佸鐞嗘槑纭换鍔°€�</td>
-              <td>浠诲姟鎻忚堪妯＄硦鏃朵細鎺㈢储銆佽窇鍛戒护銆侀噸璇曪紝娑堣€椾笉鍙娴嬨€�</td>
-              <td>issue 妯℃澘鍐欐竻楠屾敹鏍囧噯銆佷笉鍙敼鑼冨洿銆佹祴璇曞懡浠ゃ€佹渶澶у疄鐜拌寖鍥淬€�</td>
+              <td>从 issue 自动开分支、提交 PR、处理明确任务。</td>
+              <td>任务描述模糊时会探索、跑命令、重试，消耗不可预测。</td>
+              <td>issue 模板写清验收标准、不可改范围、测试命令、最大实现范围。</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="callout success">
-        <strong>鍏ュ彛閫夋嫨鍙ｈ瘈锛�</strong>鑳借ˉ鍏ㄥ氨鍒� Chat锛岃兘 Inline Edit 灏卞埆 Agent锛岃兘 Ask 娓呮灏卞埆璁� Agent 鐚滐紝鑳藉皬 PR Review 灏卞埆鍏ㄤ粨鎵弿銆�
+        <strong>入口选择口诀：</strong>能补全就别 Chat，能 Inline Edit 就别 Agent，能 Ask 清楚就别让 Agent 猜，能小 PR Review 就别全仓扫描。
       </div>
     </section>
 
     <section id="agent">
-      <h2>Agent 楂橀樁鎶€宸э細鎶婃帰绱㈠彉鎴愭墽琛岋紝鎶婂け鎺у彉鎴愬彲鎺�</h2>
-      <p class="section-lead">Agent 涓嶆槸鈥滄洿鑱槑鐨� Chat鈥濓紝鑰屾槸浼氬杞皟鐢ㄦā鍨嬨€佽鍙栨枃浠躲€佹墽琛屽懡浠ゅ拰浣跨敤宸ュ叿鐨勫伐浣滄祦銆傚畠鐨勪环鍊奸珮锛屼絾蹇呴』鏈夎竟鐣屻€�</p>
+      <h2>Agent 高阶技巧：把探索变成执行，把失控变成可控</h2>
+      <p class="section-lead">Agent 不是“更聪明的 Chat”，而是会多轮调用模型、读取文件、执行命令和使用工具的工作流。它的价值高，但必须有边界。</p>
       <div class="grid grid-2">
         <div class="card">
-          <h3>濂� Agent 鎻愮ず璇�</h3>
+          <h3>好 Agent 提示词</h3>
           <pre>Goal:
 Implement user-level budget display in admin page.
 
@@ -839,104 +839,104 @@ Output:
 Final summary only, max 5 bullets.</pre>
         </div>
         <div class="card">
-          <h3>鍧� Agent 鎻愮ず璇�</h3>
-          <pre>甯垜鐪嬬湅杩欎釜椤圭洰鍝噷鍙互浼樺寲锛�
-椤轰究淇竴涓嬫湁闂鐨勫湴鏂癸紝
-鏈€濂芥€ц兘鍜屾灦鏋勯兘鎻愬崌涓€涓嬨€�</pre>
-          <p>闂锛氳寖鍥存棤闄愩€侀獙鏀舵爣鍑嗙己澶便€佸鏄撳叏浠撴帰绱€€佽緭鍑哄啑闀裤€佽繑宸ユ鐜囬珮銆�</p>
+          <h3>坏 Agent 提示词</h3>
+          <pre>帮我看看这个项目哪里可以优化，
+顺便修一下有问题的地方，
+最好性能和架构都提升一下。</pre>
+          <p>问题：范围无限、验收标准缺失、容易全仓探索、输出冗长、返工概率高。</p>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Agent 鎴愭湰鎺у埗鐐�</th><th>寤鸿</th><th>鏁堟灉</th></tr>
+            <tr><th>Agent 成本控制点</th><th>建议</th><th>效果</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>鏈€澶ц疆娆�</strong></td><td>澶嶆潅浠诲姟璁剧疆 10鈥�20 杞紱涓嶆竻妤氭椂鍏堝仠涓嬫潵闂€�</td><td>闃叉鏃犵┓鎺㈢储鍜岄噸澶嶅懡浠ゃ€�</td></tr>
-            <tr><td><strong>宸ュ叿鏉冮檺</strong></td><td>鍙厑璁告湰浠诲姟闇€瑕佺殑宸ュ叿锛汳CP 鎸� workspace 鍚敤銆�</td><td>鍑忓皯 Schema 绋庡拰璇皟鐢ㄩ闄┿€�</td></tr>
-            <tr><td><strong>缁堢杈撳嚭</strong></td><td>浣跨敤 quiet/no-progress锛涘彧鍥炰紶澶辫触鐗囨鍜屽叧閿憳瑕併€�</td><td>鍑忓皯鏃ュ織鍣０杩涘叆涓婁笅鏂囥€�</td></tr>
-            <tr><td><strong>浠诲姟鍒囩墖</strong></td><td>鎶娾€滃ぇ杩佺Щ鈥濇媶鎴� schema銆丄PI銆乁I銆佹祴璇曞嚑涓� PR銆�</td><td>闄嶄綆鍗曟涓婁笅鏂囧拰杩斿伐鎴愭湰銆�</td></tr>
-            <tr><td><strong>楠岃瘉鍛戒护</strong></td><td>鎻愬墠鍐欐竻 targeted test锛屼笉璁� Agent 鑷繁鐚溿€�</td><td>鍑忓皯璺戦敊鍛戒护銆佽閿欎緷璧栥€侀噸澶嶉獙璇併€�</td></tr>
+            <tr><td><strong>最大轮次</strong></td><td>复杂任务设置 10–20 轮；不清楚时先停下来问。</td><td>防止无穷探索和重复命令。</td></tr>
+            <tr><td><strong>工具权限</strong></td><td>只允许本任务需要的工具；MCP 按 workspace 启用。</td><td>减少 Schema 税和误调用风险。</td></tr>
+            <tr><td><strong>终端输出</strong></td><td>使用 quiet/no-progress；只回传失败片段和关键摘要。</td><td>减少日志噪声进入上下文。</td></tr>
+            <tr><td><strong>任务切片</strong></td><td>把“大迁移”拆成 schema、API、UI、测试几个 PR。</td><td>降低单次上下文和返工成本。</td></tr>
+            <tr><td><strong>验证命令</strong></td><td>提前写清 targeted test，不让 Agent 自己猜。</td><td>减少跑错命令、装错依赖、重复验证。</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section id="team">
-      <h2>涓汉涓庡洟闃熷缓璁細璁╁ソ涔犳儻鍙樻垚榛樿宸ヤ綔鏂瑰紡</h2>
-      <p class="section-lead">Copilot 鐨勬敹鐩婃潵鑷寔缁娇鐢紝涔熸潵鑷寔缁紭鍖栥€傛妸妯″瀷閫夋嫨銆佷笂涓嬫枃绠＄悊銆丄gent 杈圭晫鍜岃緭鍑烘牸寮忓彉鎴愬洟闃熷叡璇嗭紝鑳藉悓鏃舵彁鍗囦氦浠橀€熷害銆佽川閲忓拰鍙帶鎬с€�</p>
+      <h2>个人与团队建议：让好习惯变成默认工作方式</h2>
+      <p class="section-lead">Copilot 的收益来自持续使用，也来自持续优化。把模型选择、上下文管理、Agent 边界和输出格式变成团队共识，能同时提升交付速度、质量和可控性。</p>
       <div class="grid grid-3">
         <div class="card">
-          <h3>鎸夊伐浣滅被鍨嬪垎灞�</h3>
-          <p>鏃ュ父寮€鍙戙€佸鏉傞噸鏋勩€佹灦鏋勮瘎瀹°€佸涔犻棶绛旈€傚悎涓嶅悓妯″瀷鍜屾ā寮忋€備笉瑕佹妸鎵€鏈変换鍔￠兘濂楄繘鍚屼竴绉嶅伐浣滄祦銆�</p>
+          <h3>按工作类型分层</h3>
+          <p>日常开发、复杂重构、架构评审、学习问答适合不同模型和模式。不要把所有任务都套进同一种工作流。</p>
         </div>
         <div class="card">
-          <h3>澶嶇洏楂樻秷鑰椾换鍔�</h3>
-          <p>璁板綍浠诲姟鍏ュ彛銆佹ā鍨嬨€佹ā寮忋€佹枃浠惰寖鍥淬€佸伐鍏疯皟鐢ㄥ拰鏄惁閲嶅鎵ц銆傚鐩樹竴娆￠珮娑堣€椾换鍔★紝閫氬父鑳藉舰鎴愬娆″鐢ㄧ殑浼樺寲涔犳儻銆�</p>
+          <h3>复盘高消耗任务</h3>
+          <p>记录任务入口、模型、模式、文件范围、工具调用和是否重复执行。复盘一次高消耗任务，通常能形成多次复用的优化习惯。</p>
         </div>
         <div class="card">
-          <h3>寤虹珛榛樿瑙勫垯</h3>
-          <p>鎶婂父鐢ㄦ彁绀鸿瘝妯℃澘銆佷粨搴撴寚浠ゃ€丄gent 鑼冨洿绾︽潫鍜� Review 鑼冨洿鍐欐垚鍥㈤槦榛樿瑙勫垯锛屽噺灏戞瘡涓汉閲嶅鎽哥储銆�</p>
+          <h3>建立默认规则</h3>
+          <p>把常用提示词模板、仓库指令、Agent 范围约束和 Review 范围写成团队默认规则，减少每个人重复摸索。</p>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>浼樺寲鍔ㄤ綔</th><th>寤鸿鍋氭硶</th><th>瑙傚療淇″彿</th></tr>
+            <tr><th>优化动作</th><th>建议做法</th><th>观察信号</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>閰嶇疆鍥為【</strong></td><td>妫€鏌� MCP銆乮nstructions銆佹ā鍨嬮粯璁ゅ€笺€丄gent 浣跨敤棰戠巼銆�</td><td>閲嶅宸ュ叿璋冪敤鍑忓皯锛岄暱浼氳瘽鍑忓皯銆�</td></tr>
-            <tr><td><strong>瀹炶返鍒嗕韩</strong></td><td>娌夋穩 Plan鈫扐gent銆佷笂涓嬫枃鍒囩墖銆佽緭鍑烘帶鍒躲€丳R Review 鑼冨洿鐨勭ず渚嬨€�</td><td>杩斿伐娆℃暟鍑忓皯锛屼换鍔″畬鎴愭洿绋冲畾銆�</td></tr>
-            <tr><td><strong>妯℃澘澶嶇敤</strong></td><td>鎶婇珮棰戝満鏅仛鎴愬彲澶嶅埗鎻愮ず璇嶆ā鏉裤€�</td><td>鍚岀被浠诲姟杈撳嚭鏇翠竴鑷淬€�</td></tr>
-            <tr><td><strong>浠诲姟鎷嗗垎</strong></td><td>鎶婂ぇ鑼冨洿閲嶆瀯銆佸ぇ PR銆佸ぇ鏃ュ織璇婃柇鎷嗘垚灏忔壒娆°€�</td><td>Agent 杞鏇村皯锛孯eview 鏇磋仛鐒︺€�</td></tr>
+            <tr><td><strong>配置回顾</strong></td><td>检查 MCP、instructions、模型默认值、Agent 使用频率。</td><td>重复工具调用减少，长会话减少。</td></tr>
+            <tr><td><strong>实践分享</strong></td><td>沉淀 Plan→Agent、上下文切片、输出控制、PR Review 范围的示例。</td><td>返工次数减少，任务完成更稳定。</td></tr>
+            <tr><td><strong>模板复用</strong></td><td>把高频场景做成可复制提示词模板。</td><td>同类任务输出更一致。</td></tr>
+            <tr><td><strong>任务拆分</strong></td><td>把大范围重构、大 PR、大日志诊断拆成小批次。</td><td>Agent 轮次更少，Review 更聚焦。</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section id="personas">
-      <h2>鎸夌敤鎴风敾鍍忓埗瀹� Copilot 浣跨敤绛栫暐</h2>
-      <p class="section-lead">鍚屼竴涓绠楃瓥鐣ヤ笉閫傚悎鎵€鏈変汉銆傜湡姝ｅ彲鎸佺画鐨� Copilot 鎺ㄥ箍锛岄渶瑕佹妸鐢ㄦ埛鎸変换鍔″鏉傚害銆丄gent 棰戠巼銆佷唬鐮佸奖鍝嶈寖鍥村拰涓氬姟鍏抽敭鎬у垎灞傘€�</p>
+      <h2>按用户画像制定 Copilot 使用策略</h2>
+      <p class="section-lead">同一个预算策略不适合所有人。真正可持续的 Copilot 推广，需要把用户按任务复杂度、Agent 频率、代码影响范围和业务关键性分层。</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>鐢ㄦ埛鐢诲儚</th><th>鍏稿瀷浠诲姟</th><th>鎺ㄨ崘榛樿鏂瑰紡</th><th>閲嶇偣鍩硅</th><th>娌荤悊寤鸿</th></tr>
+            <tr><th>用户画像</th><th>典型任务</th><th>推荐默认方式</th><th>重点培训</th><th>治理建议</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>鏅€氬紑鍙戣€�</strong></td>
-              <td>琛ュ叏銆佸崟鏂囦欢淇敼銆佹祴璇曡ˉ鍏呫€丄PI 鏌ヨ銆�</td>
-              <td>Completion / Inline Edit / Ask锛涢粯璁� Auto 鎴栫粡娴庢ā鍨嬨€�</td>
-              <td>閫変腑浠ｇ爜鍐嶉棶銆侀檺鍒惰緭鍑恒€佷笉瑕佹ā绯婂紑 Agent銆�</td>
-              <td>浼樺厛浣跨敤杞婚噺妯″紡锛涢伩鍏嶉噸澶� Agent 鍜屽ぇ鑼冨洿 Review銆�</td>
+              <td><strong>普通开发者</strong></td>
+              <td>补全、单文件修改、测试补充、API 查询。</td>
+              <td>Completion / Inline Edit / Ask；默认 Auto 或经济模型。</td>
+              <td>选中代码再问、限制输出、不要模糊开 Agent。</td>
+              <td>优先使用轻量模式；避免重复 Agent 和大范围 Review。</td>
             </tr>
             <tr>
               <td><strong>Power User</strong></td>
-              <td>澶氭枃浠跺姛鑳姐€侀噸鏋勩€佽縼绉汇€丆I 淇銆�</td>
-              <td>Plan 鈫� Agent锛涗富鍔涙ā鍨嬫墽琛岋紝楂橀樁妯″瀷鍙鍒掋€�</td>
-              <td>浠诲姟鍒囩墖銆侀獙鏀舵爣鍑嗐€佺粓绔緭鍑哄帇缂┿€丮CP 鏈€灏忓寲銆�</td>
-              <td>寤虹珛鏈€浣冲疄璺垫牱渚嬪簱锛涘畾鏈熷鐩樺鏉備换鍔°€�</td>
+              <td>多文件功能、重构、迁移、CI 修复。</td>
+              <td>Plan → Agent；主力模型执行，高阶模型只规划。</td>
+              <td>任务切片、验收标准、终端输出压缩、MCP 最小化。</td>
+              <td>建立最佳实践样例库；定期复盘复杂任务。</td>
             </tr>
             <tr>
-              <td><strong>鏋舵瀯/瀹夊叏/骞冲彴宸ョ▼甯�</strong></td>
-              <td>鏋舵瀯璇勫銆佸畨鍏ㄥ▉鑳佸缓妯°€佽法浠撳簱鍐崇瓥銆�</td>
-              <td>楂橀樁妯″瀷 Ask/Plan锛涜緭鍑虹粨鏋勫寲鍐崇瓥锛屼笉闀挎椂闂存墽琛屻€�</td>
-              <td>椋庨櫓娓呭崟銆佽竟鐣屾潯浠躲€佸彧瀹＄湡瀹為棶棰樸€�</td>
-              <td>楂橀樁妯″瀷鐢ㄤ簬鍏抽敭鍒ゆ柇锛涙墽琛岄樁娈典繚鎸佽寖鍥存竻鏅般€�</td>
+              <td><strong>架构/安全/平台工程师</strong></td>
+              <td>架构评审、安全威胁建模、跨仓库决策。</td>
+              <td>高阶模型 Ask/Plan；输出结构化决策，不长时间执行。</td>
+              <td>风险清单、边界条件、只审真实问题。</td>
+              <td>高阶模型用于关键判断；执行阶段保持范围清晰。</td>
             </tr>
             <tr>
-              <td><strong>鏂版墜寮€鍙戣€�</strong></td>
-              <td>瀛︿範妗嗘灦銆佽В閲婇敊璇€佺悊瑙ｄ唬鐮併€�</td>
-              <td>Ask + 绀轰緥锛涘繀瑕佹椂瑕佹眰瑙ｉ噴锛屼絾闄愬埗闀垮害銆�</td>
-              <td>濡備綍鎻愬嚭涓婁笅鏂囥€佸浣曢獙璇佸洖绛斻€佷笉瑕佺洸鐩矘璐淬€�</td>
-              <td>澶氱敤鐭棶绛斿拰绀轰緥锛涢噸鐐归槻姝㈤暱浼氳瘽婊氶洩鐞冦€�</td>
+              <td><strong>新手开发者</strong></td>
+              <td>学习框架、解释错误、理解代码。</td>
+              <td>Ask + 示例；必要时要求解释，但限制长度。</td>
+              <td>如何提出上下文、如何验证回答、不要盲目粘贴。</td>
+              <td>多用短问答和示例；重点防止长会话滚雪球。</td>
             </tr>
             <tr>
-              <td><strong>鍥㈤槦绠＄悊鍛�</strong></td>
-              <td>鍥㈤槦榛樿閰嶇疆銆佹渶浣冲疄璺点€佺敤閲忚瀵熴€佹ā鏉挎帹骞裤€�</td>
-              <td>Dashboard + 鍥㈤槦瀹炶返澶嶇洏銆�</td>
-              <td>鍏ュ彛宸紓銆佹ā鍨嬭矾鐢便€佷笂涓嬫枃娌荤悊銆佹ā鏉跨淮鎶ゃ€�</td>
-              <td>鍏堝府鍔╁洟闃熷舰鎴愬ソ涔犳儻锛屽啀璋冩暣閰嶇疆绛栫暐銆�</td>
+              <td><strong>团队管理员</strong></td>
+              <td>团队默认配置、最佳实践、用量观察、模板推广。</td>
+              <td>Dashboard + 团队实践复盘。</td>
+              <td>入口差异、模型路由、上下文治理、模板维护。</td>
+              <td>先帮助团队形成好习惯，再调整配置策略。</td>
             </tr>
           </tbody>
         </table>
@@ -944,78 +944,78 @@ Final summary only, max 5 bullets.</pre>
     </section>
 
     <section id="diagnostics">
-      <h2>楂樻秷鑰楀満鏅瘖鏂煩闃�</h2>
-      <p class="section-lead">褰� Copilot 鐨勪竴娆′换鍔℃槑鏄炬瘮棰勬湡鏇存參銆佹洿闀挎垨鏇存秷鑰楁椂锛岄€氬父鍙互浠庢ā寮忋€佷笂涓嬫枃銆佸伐鍏峰拰杈撳嚭鍥涗釜缁村害瀹氫綅鍘熷洜銆�</p>
+      <h2>高消耗场景诊断矩阵</h2>
+      <p class="section-lead">当 Copilot 的一次任务明显比预期更慢、更长或更消耗时，通常可以从模式、上下文、工具和输出四个维度定位原因。</p>
       <div class="grid grid-2">
         <div class="card">
-          <h3>鐥囩姸锛欰gent 涓€璺戝氨鐑у緱蹇�</h3>
+          <h3>症状：Agent 一跑就烧得快</h3>
           <ul>
-            <li><strong>甯歌鍘熷洜锛�</strong>浠诲姟妯＄硦銆佽疆娆¤繃澶氥€佸叏浠撴帰绱€€丮CP 宸ュ叿杩囧銆佺粓绔棩蹇楄繃闀裤€�</li>
-            <li><strong>蹇€熶慨澶嶏細</strong>鍏� Plan锛涢檺鍒剁洰褰曞拰鏂囦欢锛涜缃渶澶ц疆娆★紱鍏抽棴鏃犲叧宸ュ叿锛涘彧璺� targeted tests銆�</li>
-            <li><strong>瑙傚療淇″彿锛�</strong>妯″瀷銆佹ā寮忋€佹墽琛屾鏁般€佸伐鍏疯皟鐢ㄣ€佹秹鍙婃枃浠舵暟銆佺粓绔緭鍑鸿妯°€�</li>
+            <li><strong>常见原因：</strong>任务模糊、轮次过多、全仓探索、MCP 工具过多、终端日志过长。</li>
+            <li><strong>快速修复：</strong>先 Plan；限制目录和文件；设置最大轮次；关闭无关工具；只跑 targeted tests。</li>
+            <li><strong>观察信号：</strong>模型、模式、执行步数、工具调用、涉及文件数、终端输出规模。</li>
           </ul>
         </div>
         <div class="card">
-          <h3>鐥囩姸锛欳hat 瓒婅亰瓒婃參銆佽秺鑱婅秺璐�</h3>
+          <h3>症状：Chat 越聊越慢、越聊越贵</h3>
           <ul>
-            <li><strong>甯歌鍘熷洜锛�</strong>鍘嗗彶杩囬暱銆佷富棰樻贩鏉傘€佸ぇ鏂囦欢鍙嶅寮曠敤銆佹病鏈夋€荤粨閲嶅紑銆�</li>
-            <li><strong>蹇€熶慨澶嶏細</strong>璁� Copilot 鐢熸垚 handoff summary锛涙柊寤轰細璇濓紱鍙创鍏抽敭鐗囨銆�</li>
-            <li><strong>瑙傚療淇″彿锛�</strong>杞鏁般€佷笂涓嬫枃鏂囦欢銆佹槸鍚﹀涓婚銆佹槸鍚﹂噸澶嶈В閲娿€�</li>
+            <li><strong>常见原因：</strong>历史过长、主题混杂、大文件反复引用、没有总结重开。</li>
+            <li><strong>快速修复：</strong>让 Copilot 生成 handoff summary；新建会话；只贴关键片段。</li>
+            <li><strong>观察信号：</strong>轮次数、上下文文件、是否多主题、是否重复解释。</li>
           </ul>
         </div>
         <div class="card">
-          <h3>鐥囩姸锛欳ode Review 娑堣€楅珮</h3>
+          <h3>症状：Code Review 消耗高</h3>
           <ul>
-            <li><strong>甯歌鍘熷洜锛�</strong>PR 澶ぇ銆佸叏閲� review銆佸娆￠噸澶� review銆佽姹傝В閲婃墍鏈夐鏍奸棶棰樸€�</li>
-            <li><strong>蹇€熶慨澶嶏細</strong>鎸夌洰褰曞垎鎵癸紱鍙 security/performance/breaking changes/test gaps銆�</li>
-            <li><strong>瑙傚療淇″彿锛�</strong>PR 鏂囦欢鏁般€乨iff 琛屾暟銆乺eview 娆℃暟銆佸鏌ヨ寖鍥淬€�</li>
+            <li><strong>常见原因：</strong>PR 太大、全量 review、多次重复 review、要求解释所有风格问题。</li>
+            <li><strong>快速修复：</strong>按目录分批；只审 security/performance/breaking changes/test gaps。</li>
+            <li><strong>观察信号：</strong>PR 文件数、diff 行数、review 次数、审查范围。</li>
           </ul>
         </div>
         <div class="card">
-          <h3>鐥囩姸锛欳LI/缁堢浠诲姟娑堣€楅珮</h3>
+          <h3>症状：CLI/终端任务消耗高</h3>
           <ul>
-            <li><strong>甯歌鍘熷洜锛�</strong>瀹夎鏃ュ織銆佹祴璇曟棩蹇椼€丏ocker 杈撳嚭銆乴ockfile diff銆乸rogress bar 杩涘叆涓婁笅鏂囥€�</li>
-            <li><strong>蹇€熶慨澶嶏細</strong>浣跨敤 quiet/no-progress锛涗繚鐣欏け璐ュ爢鏍堬紱涓嶈鎶婂畬鏁存棩蹇楀杺缁欐ā鍨嬨€�</li>
-            <li><strong>瑙傚療淇″彿锛�</strong>鍛戒护銆佽緭鍑鸿鏁般€佹槸鍚﹂噸澶嶈繍琛屻€佹槸鍚﹀彲澶嶇幇銆�</li>
+            <li><strong>常见原因：</strong>安装日志、测试日志、Docker 输出、lockfile diff、progress bar 进入上下文。</li>
+            <li><strong>快速修复：</strong>使用 quiet/no-progress；保留失败堆栈；不要把完整日志喂给模型。</li>
+            <li><strong>观察信号：</strong>命令、输出行数、是否重复运行、是否可复现。</li>
           </ul>
         </div>
       </div>
       <div class="callout success">
-        <strong>浼樺厛鍋氫笁涓姩浣滐細</strong>缂╁皬涓婁笅鏂囥€侀檺鍒惰緭鍑恒€佹媶鍒嗕换鍔°€傚ぇ澶氭暟楂樻秷鑰楀満鏅兘鑳介€氳繃杩欎笁姝ュ厛闄嶄笅鏉ワ紝鍐嶅喅瀹氭槸鍚﹂渶瑕佹洿鎹㈡ā鍨嬫垨妯″紡銆�
+        <strong>优先做三个动作：</strong>缩小上下文、限制输出、拆分任务。大多数高消耗场景都能通过这三步先降下来，再决定是否需要更换模型或模式。
       </div>
     </section>
 
     <section id="router">
-      <h2>浠诲姟璺敱鍣細30 绉掗€夊妯″瀷涓庢ā寮�</h2>
-      <p class="section-lead">鍏堥€夋嫨鏈€鎺ヨ繎鐨勪换鍔＄被鍨嬶紝鍐嶆寜鎺ㄨ崘鍏ュ彛銆佹ā鍨嬪拰鎻愮ず璇嶆墽琛屻€傞€夊璧风偣锛岄€氬父鑳藉噺灏戞帰绱€€佽繑宸ュ拰涓嶅繀瑕佺殑涓婁笅鏂囨秷鑰椼€�</p>
+      <h2>任务路由器：30 秒选对模型与模式</h2>
+      <p class="section-lead">先选择最接近的任务类型，再按推荐入口、模型和提示词执行。选对起点，通常能减少探索、返工和不必要的上下文消耗。</p>
       <div class="router">
         <div class="router-panel">
-          <h3>閫夋嫨浣犵殑浠诲姟</h3>
+          <h3>选择你的任务</h3>
           <div class="choice-list" id="taskChoices">
-            <button data-task="lookup" class="active">鏌� API / 瑙ｉ噴閿欒 / 璇硶闂 <small>浣庢垚鏈�</small></button>
-            <button data-task="single">鍗曟枃浠舵敼鍔� / 鍗曞厓娴嬭瘯 / 灏� bug <small>鍙帶</small></button>
-            <button data-task="feature">澶氭枃浠跺姛鑳� / 閲嶆瀯 / 杩佺Щ <small>闇€璁″垝</small></button>
-            <button data-task="review">PR Review / 瀹夊叏鎬ц兘瀹℃煡 <small>闄愯寖鍥�</small></button>
-            <button data-task="architecture">鏋舵瀯 / 瀹夊叏 / 澶嶆潅鏈煡闂 <small>楂樹环鍊�</small></button>
-            <button data-task="automation">CLI / 鑴氭湰 / 缁堢鑷姩鍖� <small>鎺ф棩蹇�</small></button>
+            <button data-task="lookup" class="active">查 API / 解释错误 / 语法问题 <small>低成本</small></button>
+            <button data-task="single">单文件改动 / 单元测试 / 小 bug <small>可控</small></button>
+            <button data-task="feature">多文件功能 / 重构 / 迁移 <small>需计划</small></button>
+            <button data-task="review">PR Review / 安全性能审查 <small>限范围</small></button>
+            <button data-task="architecture">架构 / 安全 / 复杂未知问题 <small>高价值</small></button>
+            <button data-task="automation">CLI / 脚本 / 终端自动化 <small>控日志</small></button>
           </div>
         </div>
         <div class="result-box" id="taskResult">
-          <h3>鎺ㄨ崘锛欰sk + Auto/mini</h3>
+          <h3>推荐：Ask + Auto/mini</h3>
           <dl>
-            <dt>鍏ュ彛</dt><dd>IDE Chat 鎴� GitHub Copilot App銆�</dd>
-            <dt>妯″瀷</dt><dd>Auto銆乵ini 鎴� fast model銆�</dd>
-            <dt>鎻愮ず璇�</dt><dd>鐩存帴璐撮敊璇憳瑕佹垨 API 鍚嶇О锛岃姹� 3 bullets max銆�</dd>
-            <dt>閬垮潙</dt><dd>涓嶈绮樿创瀹屾暣鏃ュ織锛涘彧淇濈暀鎶ラ敊鍫嗘爤鍜岀浉鍏充唬鐮併€�</dd>
+            <dt>入口</dt><dd>IDE Chat 或 GitHub Copilot App。</dd>
+            <dt>模型</dt><dd>Auto、mini 或 fast model。</dd>
+            <dt>提示词</dt><dd>直接贴错误摘要或 API 名称，要求 3 bullets max。</dd>
+            <dt>避坑</dt><dd>不要粘贴完整日志；只保留报错堆栈和相关代码。</dd>
           </dl>
         </div>
       </div>
 
       <div class="risk-meter">
-        <h3>Token 椋庨櫓鑷祴</h3>
-        <p class="section-lead">杩欐槸涓€涓惎鍙戝紡璇勫垎锛屼笉浠ｈ〃鐪熷疄璐﹀崟锛涘畠甯姪鐢ㄦ埛鍦ㄦ墽琛屽墠鍒ゆ柇浠诲姟鏄惁瀹规槗澶辨帶銆�</p>
+        <h3>Token 风险自测</h3>
+        <p class="section-lead">这是一个启发式评分，不代表真实账单；它帮助用户在执行前判断任务是否容易失控。</p>
         <div class="risk-controls">
-          <label>妯″紡
+          <label>模式
             <select id="riskMode">
               <option value="1">Ask / Inline Edit</option>
               <option value="2">Plan</option>
@@ -1023,91 +1023,91 @@ Final summary only, max 5 bullets.</pre>
               <option value="5">Agent + CLI/Tools</option>
             </select>
           </label>
-          <label>妯″瀷
+          <label>模型
             <select id="riskModel">
               <option value="1">Auto / mini</option>
-              <option value="2">涓诲姏閫氱敤妯″瀷</option>
-              <option value="4">楂橀樁鎺ㄧ悊妯″瀷</option>
+              <option value="2">主力通用模型</option>
+              <option value="4">高阶推理模型</option>
             </select>
           </label>
-          <label>涓婁笅鏂�
+          <label>上下文
             <select id="riskContext">
-              <option value="1">閫変腑浠ｇ爜 / 1 涓枃浠�</option>
-              <option value="2">灏戦噺鏂囦欢</option>
-              <option value="4">澶氭枃浠� / 澶� PR</option>
-              <option value="5">闀夸細璇� / 鍏ㄤ粨鎺㈢储</option>
+              <option value="1">选中代码 / 1 个文件</option>
+              <option value="2">少量文件</option>
+              <option value="4">多文件 / 大 PR</option>
+              <option value="5">长会话 / 全仓探索</option>
             </select>
           </label>
-          <label>宸ュ叿
+          <label>工具
             <select id="riskTools">
-              <option value="1">鏃犲伐鍏�</option>
-              <option value="2">灏戦噺鍐呯疆宸ュ叿</option>
-              <option value="4">澶氫釜 MCP / 澶栭儴宸ュ叿</option>
+              <option value="1">无工具</option>
+              <option value="2">少量内置工具</option>
+              <option value="4">多个 MCP / 外部工具</option>
             </select>
           </label>
         </div>
         <div class="risk-score">
-          <div class="score-circle" id="riskScore">浣�</div>
+          <div class="score-circle" id="riskScore">低</div>
           <div>
-            <h3 id="riskTitle">浣庨闄╋細鍙互鐩存帴鎵ц</h3>
-            <p id="riskAdvice">淇濇寔杈撳嚭涓婇檺锛岄伩鍏嶇矘璐村畬鏁存棩蹇楀嵆鍙€�</p>
+            <h3 id="riskTitle">低风险：可以直接执行</h3>
+            <p id="riskAdvice">保持输出上限，避免粘贴完整日志即可。</p>
           </div>
         </div>
       </div>
     </section>
 
     <section id="checklist">
-      <h2>鏄庡ぉ灏辫兘寮€濮嬬殑琛屽姩娓呭崟</h2>
-      <p class="section-lead">鎸夋敹鐩婁紭鍏堢骇鎺掑簭銆傛渶鍏堝仛 1銆�3銆�6锛岄€氬父鏈€蹇湅鍒版晥鏋溿€�</p>
+      <h2>明天就能开始的行动清单</h2>
+      <p class="section-lead">按收益优先级排序。最先做 1、3、6，通常最快看到效果。</p>
       <ul class="checklist">
-        <li><strong>鍘嬬缉浠撳簱鎸囦护锛�</strong>鎶� <code>copilot-instructions.md</code> 浠� Wiki 鏀规垚鈥滃湴闆锋竻鍗� + 杈撳嚭瑙勫垯鈥濄€�</li>
-        <li><strong>榛樿杈撳嚭涓婇檺锛�</strong>鍦ㄤ釜浜烘垨浠撳簱鎸囦护閲屽姞鍏ョ煭杈撳嚭瑙勫垯锛屽 <code>3 bullets max</code>銆�<code>code only</code>銆�</li>
-        <li><strong>鐩樼偣 MCP 鍜屾彃浠讹細</strong>鍏抽棴涓嶇敤鐨勬湇鍔″櫒鍜屽伐鍏凤紝鎸夊伐浣滃尯鑰屼笉鏄叏灞€鍚敤銆�</li>
-        <li><strong>鍏� Ask 鍚� Agent锛�</strong>楠屾敹鏍囧噯璇翠笉娓呮椂锛屽厛璁� Copilot 浜у嚭璁″垝鍜屾枃浠舵竻鍗曘€�</li>
-        <li><strong>榛樿缁忔祹妯″瀷锛�</strong>鏃ュ父浠诲姟鐢� Auto/mini/涓诲姏妯″瀷锛岄珮闃舵ā鍨嬪彧鍋氬鏉傝鍒掑拰鍏抽敭瀹℃煡銆�</li>
-        <li><strong>浣跨敤 applyTo 鎸囦护锛�</strong>鎶� API銆丏B銆乁I銆佹祴璇曡鍒欐媶鎴愯矾寰勯檺瀹氭枃浠讹紝閬垮厤姣忚疆鍏ㄩ噺鍔犺浇銆�</li>
-        <li><strong>寤虹珛鏂颁細璇濅範鎯細</strong>闀夸細璇濇€荤粨鍚庨噸寮€锛汣LI/Agent 涓婚鍒囨崲鏃舵竻涓婁笅鏂囥€�</li>
-        <li><strong>缁堢瀹夐潤杈撳嚭锛�</strong>璁╂祴璇曘€佹瀯寤恒€佸畨瑁呭懡浠や娇鐢� quiet/no-progress锛屽彧鎶婂け璐ユ憳瑕佺粰妯″瀷銆�</li>
-        <li><strong>Code Review 鍒嗚寖鍥达細</strong>澶� PR 鎸夌洰褰曘€侀闄╃被鍨嬨€佸彉鏇寸被鍨嬪垎鎵瑰銆�</li>
-        <li><strong>姣忔湀澶嶇洏锛�</strong>缁撳悎 AI Credit 鐢ㄩ噺銆佺敤鎴疯鑹层€佷换鍔″叆鍙ｅ拰妯″瀷閫夋嫨璋冧紭棰勭畻绛栫暐銆�</li>
+        <li><strong>压缩仓库指令：</strong>把 <code>copilot-instructions.md</code> 从 Wiki 改成“地雷清单 + 输出规则”。</li>
+        <li><strong>默认输出上限：</strong>在个人或仓库指令里加入短输出规则，如 <code>3 bullets max</code>、<code>code only</code>。</li>
+        <li><strong>盘点 MCP 和插件：</strong>关闭不用的服务器和工具，按工作区而不是全局启用。</li>
+        <li><strong>先 Ask 后 Agent：</strong>验收标准说不清时，先让 Copilot 产出计划和文件清单。</li>
+        <li><strong>默认经济模型：</strong>日常任务用 Auto/mini/主力模型，高阶模型只做复杂规划和关键审查。</li>
+        <li><strong>使用 applyTo 指令：</strong>把 API、DB、UI、测试规则拆成路径限定文件，避免每轮全量加载。</li>
+        <li><strong>建立新会话习惯：</strong>长会话总结后重开；CLI/Agent 主题切换时清上下文。</li>
+        <li><strong>终端安静输出：</strong>让测试、构建、安装命令使用 quiet/no-progress，只把失败摘要给模型。</li>
+        <li><strong>Code Review 分范围：</strong>大 PR 按目录、风险类型、变更类型分批审。</li>
+        <li><strong>每月复盘：</strong>结合 AI Credit 用量、用户角色、任务入口和模型选择调优预算策略。</li>
       </ul>
     </section>
 
     <section id="faq">
-      <h2>甯歌闂 FAQ</h2>
+      <h2>常见问题 FAQ</h2>
       <div class="grid grid-2">
         <div class="card">
-          <h3>鏄笉鏄秺鐭殑鎻愮ず璇嶈秺鐪侊紵</h3>
-          <p>涓嶄竴瀹氥€傜湡姝ｉ噸瑕佺殑鏄俊鎭瘑搴︺€傚垹鎺夊濂楄瘽鏈夊府鍔╋紝浣嗗鏋滃洜涓哄お鐭鑷存ā鍨嬭瑙ｃ€佸弽澶嶈拷闂垨杩斿伐锛屽弽鑰屾洿璐点€�</p>
+          <h3>是不是越短的提示词越省？</h3>
+          <p>不一定。真正重要的是信息密度。删掉客套话有帮助，但如果因为太短导致模型误解、反复追问或返工，反而更贵。</p>
         </div>
         <div class="card">
-          <h3>浠€涔堟椂鍊欏€煎緱鐢ㄩ珮闃舵ā鍨嬶紵</h3>
-          <p>褰撲换鍔℃秹鍙婃灦鏋勩€佸畨鍏ㄣ€佽法妯″潡澶嶆潅鍐崇瓥銆佹湭鐭ラ棶棰樻帓鏌ユ椂鍊煎緱鐢ㄣ€傚缓璁彧鐢ㄤ簬瑙勫垝鍜屽叧閿垽鏂紝鎵ц闃舵鍒囧洖涓诲姏鎴栫粡娴庢ā鍨嬨€�</p>
+          <h3>什么时候值得用高阶模型？</h3>
+          <p>当任务涉及架构、安全、跨模块复杂决策、未知问题排查时值得用。建议只用于规划和关键判断，执行阶段切回主力或经济模型。</p>
         </div>
         <div class="card">
-          <h3>Budget 鑳戒笉鑳借В鍐虫秷鑰楄繃蹇紵</h3>
-          <p>Budget 鏄闄╂姢鏍忥紝涓嶆槸浼樺寲鎵嬫銆傚畠鑳介槻姝㈣秴鏀紝浣嗕笉浼氳鍚屾牱浠诲姟鏇寸渷锛涙ā鍨嬭矾鐢便€佷笂涓嬫枃娌荤悊鍜� Agent 绾︽潫鎵嶄細闄嶄綆鍗曚换鍔℃秷鑰椼€�</p>
+          <h3>Budget 能不能解决消耗过快？</h3>
+          <p>Budget 是风险护栏，不是优化手段。它能防止超支，但不会让同样任务更省；模型路由、上下文治理和 Agent 约束才会降低单任务消耗。</p>
         </div>
         <div class="card">
-          <h3>涓轰粈涔堝悓鏍蜂竴鍙ヨ瘽锛孉gent 姣� Chat 璐碉紵</h3>
-          <p>Agent 鍙兘澶氳疆璋冪敤妯″瀷銆佽鍙栨枃浠躲€佹墽琛屽懡浠ゃ€佽皟鐢ㄥ伐鍏凤紝骞跺湪姣忎竴姝ュ甫涓婂伐鍏� Schema 鍜屽巻鍙蹭笂涓嬫枃锛汣hat 閫氬父鏄洿灏戣疆娆＄殑鐩存帴闂瓟銆�</p>
+          <h3>为什么同样一句话，Agent 比 Chat 贵？</h3>
+          <p>Agent 可能多轮调用模型、读取文件、执行命令、调用工具，并在每一步带上工具 Schema 和历史上下文；Chat 通常是更少轮次的直接问答。</p>
         </div>
         <div class="card">
-          <h3>Code Review 搴旇鎬庝箞鐪侊紵</h3>
-          <p>涓嶈璁╂ā鍨嬪鎵€鏈夐鏍奸棶棰樸€傞檺瀹氶闄╃被鍨嬨€侀檺瀹氱洰褰曘€佸垎鎵瑰澶� PR锛屽苟瑕佹眰鍙緭鍑虹湡瀹� blocker 鎴栭珮椋庨櫓闂銆�</p>
+          <h3>Code Review 应该怎么省？</h3>
+          <p>不要让模型审所有风格问题。限定风险类型、限定目录、分批审大 PR，并要求只输出真实 blocker 或高风险问题。</p>
         </div>
         <div class="card">
-          <h3>濡備綍鍒ゆ柇涓€绉嶇敤娉曟槸鍚﹀€煎緱淇濈暀锛�</h3>
-          <p>鐪嬪畠鏄惁鑳界ǔ瀹氬噺灏戣繑宸ャ€佺缉鐭氦浠樻椂闂淬€侀檷浣庝笂涓嬫枃鑶ㄨ儉锛屽苟涓斿湪鍚岀被浠诲姟閲屽彲閲嶅浣跨敤銆�</p>
+          <h3>如何判断一种用法是否值得保留？</h3>
+          <p>看它是否能稳定减少返工、缩短交付时间、降低上下文膨胀，并且在同类任务里可重复使用。</p>
         </div>
       </div>
     </section>
 
     <section id="templates">
-      <h2>鍙洿鎺ュ鍒剁殑鎻愮ず璇嶆ā鏉�</h2>
+      <h2>可直接复制的提示词模板</h2>
       <div class="grid grid-2">
         <div class="card copy-card">
-          <h3>浣庢垚鏈緞娓�</h3>
+          <h3>低成本澄清</h3>
           <pre id="tplClarify">Analyze this task before implementation.
 Return:
 1. affected files
@@ -1115,10 +1115,10 @@ Return:
 3. safest implementation path
 4. acceptance criteria
 No code. 8 bullets max.</pre>
-          <button onclick="copyTemplate('tplClarify', this)">澶嶅埗妯℃澘</button>
+          <button onclick="copyTemplate('tplClarify', this)">复制模板</button>
         </div>
         <div class="card copy-card">
-          <h3>鍙楁帶瀹炵幇</h3>
+          <h3>受控实现</h3>
           <pre id="tplImplement">Implement the approved plan.
 Constraints:
 - touch only listed files
@@ -1126,10 +1126,10 @@ Constraints:
 - preserve public API
 - run targeted tests only
 Final response: changed files + test result, max 5 bullets.</pre>
-          <button onclick="copyTemplate('tplImplement', this)">澶嶅埗妯℃澘</button>
+          <button onclick="copyTemplate('tplImplement', this)">复制模板</button>
         </div>
         <div class="card copy-card">
-          <h3>楂樹俊鍙� Review</h3>
+          <h3>高信号 Review</h3>
           <pre id="tplReview">Review this PR for real issues only:
 - security
 - data loss
@@ -1137,10 +1137,10 @@ Final response: changed files + test result, max 5 bullets.</pre>
 - breaking API changes
 - test gaps
 No style comments. Table output. Max 10 findings.</pre>
-          <button onclick="copyTemplate('tplReview', this)">澶嶅埗妯℃澘</button>
+          <button onclick="copyTemplate('tplReview', this)">复制模板</button>
         </div>
         <div class="card copy-card">
-          <h3>闀夸細璇濅氦鎺�</h3>
+          <h3>长会话交接</h3>
           <pre id="tplHandoff">Create handoff for a new Copilot session:
 - goal
 - decisions made
@@ -1149,69 +1149,69 @@ No style comments. Table output. Max 10 findings.</pre>
 - remaining work
 - risks
 No narrative. 12 bullets max.</pre>
-          <button onclick="copyTemplate('tplHandoff', this)">澶嶅埗妯℃澘</button>
+          <button onclick="copyTemplate('tplHandoff', this)">复制模板</button>
         </div>
       </div>
     </section>
 
     <div class="footer">
-      GitHub Copilot 楂樻晥浣跨敤涓� Token 浼樺寲鎸囧崡
+      GitHub Copilot 高效使用与 Token 优化指南
     </div>
   </main>
   <script>
     const taskRoutes = {
       lookup: {
-        title: "鎺ㄨ崘锛欰sk + Auto/mini",
+        title: "推荐：Ask + Auto/mini",
         rows: {
-          "鍏ュ彛": "IDE Chat 鎴� GitHub Copilot App銆�",
-          "妯″瀷": "Auto銆乵ini 鎴� fast model銆�",
-          "鎻愮ず璇�": "璐撮敊璇憳瑕併€丄PI 鍚嶇О鎴栨渶灏忎唬鐮佺墖娈碉紝瑕佹眰 3 bullets max銆�",
-          "閬垮潙": "涓嶈绮樿创瀹屾暣鏃ュ織锛涗笉瑕佺敤 Agent 鎵粨搴撱€�"
+          "入口": "IDE Chat 或 GitHub Copilot App。",
+          "模型": "Auto、mini 或 fast model。",
+          "提示词": "贴错误摘要、API 名称或最小代码片段，要求 3 bullets max。",
+          "避坑": "不要粘贴完整日志；不要用 Agent 扫仓库。"
         }
       },
       single: {
-        title: "鎺ㄨ崘锛欼nline Edit / Chat Edit + 涓诲姏鎴栫粡娴庢ā鍨�",
+        title: "推荐：Inline Edit / Chat Edit + 主力或经济模型",
         rows: {
-          "鍏ュ彛": "IDE 閲岄€変腑鍑芥暟鎴栨枃浠跺悗浣跨敤 Inline Chat/Edit銆�",
-          "妯″瀷": "Auto銆乵ini 鎴栦富鍔涢€氱敤妯″瀷銆�",
-          "鎻愮ず璇�": "鏄庣‘鍙敼閫変腑鑼冨洿锛屼繚鐣欐帴鍙ｏ紝杈撳嚭 code only銆�",
-          "閬垮潙": "涓嶈璁� Agent 涓轰竴涓嚱鏁拌鍙栧叏浠撱€�"
+          "入口": "IDE 里选中函数或文件后使用 Inline Chat/Edit。",
+          "模型": "Auto、mini 或主力通用模型。",
+          "提示词": "明确只改选中范围，保留接口，输出 code only。",
+          "避坑": "不要让 Agent 为一个函数读取全仓。"
         }
       },
       feature: {
-        title: "鎺ㄨ崘锛歅lan 鈫� Agent锛岃鍒掑拰鎵ц鍒嗙",
+        title: "推荐：Plan → Agent，规划和执行分离",
         rows: {
-          "鍏ュ彛": "鍏� Chat/Plan 杈撳嚭璁″垝锛屽啀 Agent 鎵ц銆�",
-          "妯″瀷": "楂橀樁鎴栦富鍔涙ā鍨嬪仛璁″垝锛涗富鍔�/缁忔祹妯″瀷鎵ц銆�",
-          "鎻愮ず璇�": "鍐欐竻 scope銆乤cceptance銆乼est command銆乵ax turns銆�",
-          "閬垮潙": "涓嶈鐢ㄤ竴鍙ユā绯婇渶姹傜洿鎺ュ紑 Agent銆�"
+          "入口": "先 Chat/Plan 输出计划，再 Agent 执行。",
+          "模型": "高阶或主力模型做计划；主力/经济模型执行。",
+          "提示词": "写清 scope、acceptance、test command、max turns。",
+          "避坑": "不要用一句模糊需求直接开 Agent。"
         }
       },
       review: {
-        title: "鎺ㄨ崘锛氳寖鍥撮檺瀹� Review",
+        title: "推荐：范围限定 Review",
         rows: {
-          "鍏ュ彛": "GitHub PR銆両DE diff 鎴� Copilot Code Review銆�",
-          "妯″瀷": "鎸夐闄╅€夋嫨涓诲姏鎴栭珮闃舵ā鍨嬨€�",
-          "鎻愮ず璇�": "鍙 security銆乨ata loss銆乧oncurrency銆乥reaking changes銆乼est gaps銆�",
-          "閬垮潙": "澶� PR 鍒嗙洰褰曞垎鎵瑰锛涗笉瑕佽姹傛墍鏈夐鏍煎缓璁€�"
+          "入口": "GitHub PR、IDE diff 或 Copilot Code Review。",
+          "模型": "按风险选择主力或高阶模型。",
+          "提示词": "只审 security、data loss、concurrency、breaking changes、test gaps。",
+          "避坑": "大 PR 分目录分批审；不要要求所有风格建议。"
         }
       },
       architecture: {
-        title: "鎺ㄨ崘锛氶珮闃舵ā鍨� Ask/Plan锛屼笉鐩存帴闀挎椂闂存墽琛�",
+        title: "推荐：高阶模型 Ask/Plan，不直接长时间执行",
         rows: {
-          "鍏ュ彛": "Chat / Plan锛岀敤浜庡喅绛栥€侀闄┿€佹柟妗堟瘮杈冦€�",
-          "妯″瀷": "楂橀樁鎺ㄧ悊妯″瀷銆�",
-          "鎻愮ず璇�": "瑕佹眰琛ㄦ牸杈撳嚭 tradeoff銆乺isks銆乨ecision銆乶ext steps銆�",
-          "閬垮潙": "鏂规纭畾鍚庡垏鍥炰富鍔涙ā鍨嬫垨浜哄伐鎵ц銆�"
+          "入口": "Chat / Plan，用于决策、风险、方案比较。",
+          "模型": "高阶推理模型。",
+          "提示词": "要求表格输出 tradeoff、risks、decision、next steps。",
+          "避坑": "方案确定后切回主力模型或人工执行。"
         }
       },
       automation: {
-        title: "鎺ㄨ崘锛欳LI + quiet output + 鏄庣‘鍛戒护杈圭晫",
+        title: "推荐：CLI + quiet output + 明确命令边界",
         rows: {
-          "鍏ュ彛": "Copilot CLI銆乬h CLI銆両DE terminal agent銆�",
-          "妯″瀷": "缁忔祹鎴栦富鍔涙ā鍨嬶紝闄ら潪闇€瑕佸鏉傝瘖鏂€�",
-          "鎻愮ず璇�": "瑕佹眰鐢熸垚鍛戒护鍓嶈В閲婇闄╋紱杩愯鍚庡彧鍒嗘瀽澶辫触鐗囨銆�",
-          "閬垮潙": "閬垮厤 progress銆乮nstall log銆佸畬鏁� test log 杩涘叆涓婁笅鏂囥€�"
+          "入口": "Copilot CLI、gh CLI、IDE terminal agent。",
+          "模型": "经济或主力模型，除非需要复杂诊断。",
+          "提示词": "要求生成命令前解释风险；运行后只分析失败片段。",
+          "避坑": "避免 progress、install log、完整 test log 进入上下文。"
         }
       }
     };
@@ -1240,17 +1240,17 @@ No narrative. 12 bullets max.</pre>
       const title = document.getElementById("riskTitle");
       const advice = document.getElementById("riskAdvice");
       if (score <= 6) {
-        label.textContent = "浣�";
-        title.textContent = "浣庨闄╋細鍙互鐩存帴鎵ц";
-        advice.textContent = "淇濇寔杈撳嚭涓婇檺锛岄伩鍏嶇矘璐村畬鏁存棩蹇楀嵆鍙€�";
+        label.textContent = "低";
+        title.textContent = "低风险：可以直接执行";
+        advice.textContent = "保持输出上限，避免粘贴完整日志即可。";
       } else if (score <= 10) {
-        label.textContent = "涓�";
-        title.textContent = "涓闄╋細鍏堟敹绐勮寖鍥�";
-        advice.textContent = "寤鸿鍏� Ask/Plan锛岄檺鍒舵枃浠躲€佸伐鍏峰拰杈撳嚭鏍煎紡锛屽啀鎵ц銆�";
+        label.textContent = "中";
+        title.textContent = "中风险：先收窄范围";
+        advice.textContent = "建议先 Ask/Plan，限制文件、工具和输出格式，再执行。";
       } else {
-        label.textContent = "楂�";
-        title.textContent = "楂橀闄╋細鍏堟媶浠诲姟鍐嶈繍琛�";
-        advice.textContent = "鎶婁换鍔℃媶鎴愬涓皬姝ラ锛屽叧闂棤鍏� MCP锛岃缃渶澶ц疆娆★紝骞跺厛浜у嚭楠屾敹鏍囧噯銆�";
+        label.textContent = "高";
+        title.textContent = "高风险：先拆任务再运行";
+        advice.textContent = "把任务拆成多个小步骤，关闭无关 MCP，设置最大轮次，并先产出验收标准。";
       }
     }
 
@@ -1263,10 +1263,10 @@ No narrative. 12 bullets max.</pre>
       try {
         await navigator.clipboard.writeText(text);
         const old = button.textContent;
-        button.textContent = "宸插鍒�";
+        button.textContent = "已复制";
         setTimeout(() => { button.textContent = old; }, 1200);
       } catch {
-        button.textContent = "璇锋墜鍔ㄥ鍒�";
+        button.textContent = "请手动复制";
       }
     }
   </script>
